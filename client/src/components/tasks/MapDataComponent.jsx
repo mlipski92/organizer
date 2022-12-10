@@ -17,6 +17,7 @@ const MapData = (props) => {
             itemData={el}
             status={el.status}
             whyholded={el.whyholded}
+            elData={el}
         /> ));
         return mappedData;
     }

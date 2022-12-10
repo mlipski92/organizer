@@ -34,6 +34,20 @@ const tasksReducer = (state, action) => {
                 )),
                 error: ''
             }
+        case 'RESUME_SUCCESS':
+            return {
+                loading: false,
+                tasksData: state.tasksData.map( el => {
+                    // el.id === action.payload.id ? action.payload : el
+                    if (el.id === action.payload) {
+                        console.log("test tets");
+                        el.whyholded = '';
+                    }
+                    return el;
+                    
+            }),
+                error: ''
+            }
             // console.log("moje id " + JSON.stringify(action.payload))
         default:
             return state
