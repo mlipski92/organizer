@@ -7,6 +7,7 @@ import TasksPage from './pages/TasksPage';
 import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom';
 import MainNavi from './components/MainNavi';
 import ServicesPage from './pages/ServicesPage';
+import ServiceTasksPage from './pages/ServiceTasksPage';
 
 const MainLayout = () => {
   return (
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: '/services',
         element: <ServicesPage />
+      },
+      {
+        path: '/servicetasks/:id',
+        element: <ServiceTasksPage />
       }
     ]
   }

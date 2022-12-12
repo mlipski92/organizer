@@ -46,11 +46,11 @@ const ResumeTask = (props) => (
 
 const Progress = (props) => {
     if( props.whyholded !== '') {
-        return <div className="mainPart__progress--done itemNaviPart">Wstrzymano</div>;
+        return <div className="mainPart__progress--onHold itemNaviPart">Wstrzymano</div>;
     } else if (props.status === 2) {
         return <div className="mainPart__progress--done itemNaviPart">Zrobione</div>;
     } else if (props.status === 1) {
-        return <div className="mainPart__progress--done itemNaviPart">W toku</div>;
+        return <div className="mainPart__progress--inProgress itemNaviPart">W toku</div>;
     }
 }
 

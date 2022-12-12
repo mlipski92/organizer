@@ -21,6 +21,7 @@ const SingleItem = (props) => {
                                                     <strong className="mainPart__item-title--project">{props.elData.name} ({props.elData.id})</strong>
                                                     Jakub Lipiński | Mateusz Lipski
                                                 </span>
+                                                <Link to={"/servicetasks/"+props.elData.id}>Zobacz rekordy</Link>
                                         </div>
                                         <div className="mainPart__row">
                                             <div className="mainPart__progress--done">

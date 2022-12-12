@@ -2,6 +2,8 @@ import express from "express";
 import projectRoutes from "./routes/projectsRoutes.js";
 import tasksRoutes from "./routes/tasksRoutes.js";
 import servicesRoutes from "./routes/servicesRoutes.js";
+import serviceTasksRoutes from "./routes/serviceTasksRoutes.js";
+
 
 import cors from 'cors';
 
@@ -14,6 +16,7 @@ app.use(cors());
 app.use("/projects", projectRoutes);
 app.use("/tasks", tasksRoutes);
 app.use("/services", servicesRoutes);
+app.use("/servicetasks", serviceTasksRoutes)
 
 
 app.post('/', (req, res) => {
