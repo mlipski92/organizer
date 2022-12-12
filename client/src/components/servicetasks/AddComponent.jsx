@@ -13,14 +13,14 @@ export const AddServiceTask = () => {
         setAddingServiceTask(
             {
                 id: null,
-                title: 'test',
+                title: '',
                 time: 0,
                 status: 0,
-                project: null
+                project: currentProject
 
             }
         );
-        console.log("title: "+addingServiceTask);
+        console.log("title22: "+currentProject);
     }
 
 
@@ -47,14 +47,16 @@ export const AddServiceTask = () => {
 
 export const AddServiceTaskModal = (props) => {
     const title = useRef(true);
+    const time = useRef(true);
     const { addingServiceTask, setAddingServiceTask, servicetasksDispatch } = useContext(ServiceTaskContext);
     const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
     // const { setMessage } = useContext(ProjectContext);
     // setCurrentProject(33);
 
     const inputChangeHandler = e => {
+        //  console.log();
         setAddingServiceTask({
-                ...addingServiceTask, [title.current.name]: e.target.value
+                ...addingServiceTask, [e.target.name]: e.target.value
         });    
     }
 
@@ -104,14 +106,22 @@ export const AddServiceTaskModal = (props) => {
                                     <div className="addModal__body-inside">
                                         <div className="addModal__form-list">
                                             <div className="addModal__form-item">
-                                                {/* <input  
+                                                <input  
                                                     ref={title}
                                                     name="title" 
                                                     onChange={inputChangeHandler} 
                                                     value={addingServiceTask.title} 
                                                     type="text" 
                                                     className="addModal__input" 
-                                                /> */}
+                                                />
+                                                <input 
+                                                    ref={time}
+                                                    name="time" 
+                                                    onChange={inputChangeHandler} 
+                                                    value={addingServiceTask.time} 
+                                                    type="text" 
+                                                    className="addModal__input" 
+                                                />
                                                 </div>
                                             <div className="addModal__form-item">
                                                 <div className="addModal__buttons">

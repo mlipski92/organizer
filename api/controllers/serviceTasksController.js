@@ -9,24 +9,22 @@ export const getAll = (req, res) => {
     })
 }
 
-// export const deleteItem = (req, res) => {
-//     const showRecord = "DELETE FROM tasks WHERE id = " + req.params.id;
-//     // const showRecord = "DELETE FROM tasks WHERE id = 3"
-//     db.query(showRecord, (err, data) => {
-//         if(err) return res.json(err);
-//         return res.status(200).json(data);
-//     })
-// }
+export const deleteItem = (req, res) => {
+    const showRecord = "DELETE FROM servicetasks WHERE id = " + req.params.id;
+    db.query(showRecord, (err, data) => {
+        if(err) return res.json(err);
+        return res.status(200).json(data);
+    })
+}
 
-// export const addItem = (req, res) => {
-//     const q = "INSERT INTO tasks (id, title, user, prior, project, status, whyholded) VALUES (null, '"+req.body.title+"', "+req.body.user+", "+req.body.prior+", "+req.body.project+", 1, '"+req.body.whyholded+"')"
-//     // const q = "INSERT INTO tasks (id, title, user, prior, project, status, whyholded) VALUES (null, '"+req.body.title+"', "+req.body.user+", "+req.body.prior+", 109, 1, 'sdf')"
-//     db.query(q, (err, data) => {
-//         if(err) return res.json(err);
-//         // return res.status(200).json({title: req.body.title, id: req.body.id});
-//         return res.status(200).json(data.data);
-//     })
-// }
+export const addItem = (req, res) => {
+    const q = "INSERT INTO servicetasks (id, title, time, status, project, user) VALUES (null, '"+req.body.title+"', "+req.body.time+", 1, "+req.body.project+", '"+req.body.user+"')";
+    db.query(q, (err, data) => {
+        if(err) return res.json(err);
+        // return res.status(200).json({title: req.body.title, id: req.body.id});
+        return res.status(200).json(data.data);
+    })
+}
 
 // export const tickItem = (req, res) => {
 //     const update = "UPDATE tasks SET status = 2 WHERE id = " + req.params.id;

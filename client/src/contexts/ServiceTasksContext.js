@@ -6,7 +6,9 @@ export const serviceTaskObject = {
     currentProject: null,
     setCurrentProject: () => {},
     addingServiceTask: null, 
-    setAddingServiceTask: () => {}
+    setAddingServiceTask: () => {},
+    deleteServiceTask: null,
+    setDeleteServiceTask: (id) => {}
 }
 
 export const ServiceTaskContext = createContext(serviceTaskObject);

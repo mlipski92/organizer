@@ -9,7 +9,7 @@ const serviceTasksReducer = (state, action) => {
         case 'DELETE_SUCCESS':
             return {
                 loading: false,
-                tasksData: state.tasksData.filter( el => el.id !== action.payload),
+                serviceTasksData: state.serviceTasksData.filter( el => el.id !== action.payload),
                 error: ''
             }
         case 'ADD_SUCCESS':
