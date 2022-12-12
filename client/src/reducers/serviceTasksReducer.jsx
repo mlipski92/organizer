@@ -15,7 +15,7 @@ const serviceTasksReducer = (state, action) => {
         case 'ADD_SUCCESS':
             return {
                 loading: false,
-                tasksData: [...state.tasksData, action.payload],
+                serviceTasksData: [...state.serviceTasksData, action.payload],
                 error: ''
             }
         case 'TICK_SUCCESS':

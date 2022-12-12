@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { AddServiceTask, AddServiceTaskModal } from '../components/servicetasks/AddComponent';
 import MapData from '../components/servicetasks/MapDataComponent';
-import { ServiceTaskContext } from '../contexts/ServiceTasksContext';
+import { ServiceTaskContext, serviceTaskObject } from '../contexts/ServiceTasksContext';
 import serviceTasksReducer from '../reducers/serviceTasksReducer';
 
 const initialServiceTasksState = {
@@ -14,6 +15,8 @@ const initialServiceTasksState = {
 const ServiceTasksPage = () => {
     const { id } = useParams();
     const [servicetasks, servicetasksDispatch] = useReducer(serviceTasksReducer, initialServiceTasksState);
+    const [addingServiceTask, setAddingServiceTask] = useState(serviceTaskObject.addingServiceTask);
+    const [currentProject, setCurrentProject] = useState(serviceTaskObject.currentProject);
 
     useEffect( () => {
         axios.post(`http://localhost:8800/servicetasks/get/${id}`)
@@ -23,7 +26,7 @@ const ServiceTasksPage = () => {
             console.log("data: "+JSON.stringify(servicetasks));
         }).catch(error => {
             console.log(error)
-        })
+        });
         
     }, []);
 
@@ -33,6 +36,9 @@ const ServiceTasksPage = () => {
        
             <div className="mainPart__projects">
                 <div className="mainPart__list">
+                    <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject}}>
+                        <div className="mainPart__main-title"><AddServiceTask /></div>
+                    </ServiceTaskContext.Provider>
                     <ServiceTaskContext.Provider value={{servicetasksDispatch}}>
                         { servicetasks.loading ? 'Loading' : <MapData data={servicetasks.serviceTasksData} tasksDispatch={servicetasksDispatch} />}
                     </ServiceTaskContext.Provider>  
@@ -50,6 +56,10 @@ const ServiceTasksPage = () => {
             <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, tasks}}>
                 {holdedTask !== null ? <OnHoldModal /> : null}
             </TaskContext.Provider> */}
+
+            <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject}}>
+                { addingServiceTask !== null ? <AddServiceTaskModal /> : null}
+            </ServiceTaskContext.Provider>
         </>
     )
 }
