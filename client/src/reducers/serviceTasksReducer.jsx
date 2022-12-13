@@ -21,7 +21,7 @@ const serviceTasksReducer = (state, action) => {
         case 'TICK_SUCCESS':
             return {
                 loading: false,
-                tasksData: state.tasksData.map( el => (
+                serviceTasksData: state.serviceTasksData.map( el => (
                     el.id === action.payload.itemData.id ? action.payload.itemData : el
                 )),
                 error: ''

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
+import TickServiceTask from "./TickComponent";
 // import { TaskContext } from "../../contexts/TasksContext";
 
 const DeleteButton = (props) => (
@@ -44,16 +45,21 @@ const SingleItem = (props) => {
                                                 </span>
                                                 <br />
                                                 <span className="mainPart__users">Jakub Lipiński | Mateusz Lipski</span>
+
+                                                <div className="mainPart__status"><strong>{ props.elData.status === 2 ? "ZAFAKTUROWANO" : null }</strong></div>
                                                 
                                                 <div className="buttons-list">
-                                         
+                                                    { props.elData.status !== 2 ? <TickServiceTask id={props.id} itemData={props.itemData}  data={props.data} servicetasksDispatch={props.servicetasksDispatch} /> : null}
+                                                    <DeleteButton askDeleteServiceTaskHandler={askDeleteServiceTaskHandler} id={props.id} />
                                                 </div> 
-                                                <DeleteButton askDeleteServiceTaskHandler={askDeleteServiceTaskHandler} id={props.id} />
+                                                
                                             </div>
                                         </div>
                                     </div>
                                     <div className="mainPart__column itemNavi">
-                                        progres
+                                        <div className="mainPart__time">
+                                            { props.elData.time }min
+                                        </div>
                                     </div>
                                 </div>
                             </div>

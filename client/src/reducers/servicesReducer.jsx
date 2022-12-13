@@ -6,7 +6,12 @@ const servicesReducer = (state, action) => {
                 servicesData: action.payload,
                 error: ''
             }
-            // console.log("dad"+ JSON.stringify(action.payload)
+        case 'ADD_SUCCESS':
+            return {
+                loading: false,
+                servicesData: [...state.servicesData, action.payload],
+                error: ''
+            }
         default:
             return state
     }

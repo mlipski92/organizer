@@ -176,6 +176,12 @@ body {
 }
 
 .mainPart {
+    &__time {
+        color:#D4D4D4;
+        font-size: 18px;
+        font-weight: 400;
+        font-family: 'Quicksand', sans-serif;
+    }
 
     &__why-holded {
         border: 1px solid #919042;

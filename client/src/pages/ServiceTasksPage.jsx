@@ -19,6 +19,7 @@ const ServiceTasksPage = () => {
     const [addingServiceTask, setAddingServiceTask] = useState(serviceTaskObject.addingServiceTask);
     const [currentProject, setCurrentProject] = useState(serviceTaskObject.currentProject);
     const [deleteServiceTask, setDeleteServiceTask] = useState(serviceTaskObject.deleteServiceTask);
+    const [tickingServiceTask, setTickingServiceTask] = useState(serviceTaskObject.tickingServiceTask);
 
     useEffect( () => {
         console.log(deleteServiceTask)
@@ -42,7 +43,7 @@ const ServiceTasksPage = () => {
                     <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject}}>
                         <div className="mainPart__main-title"><AddServiceTask /></div>
                     </ServiceTaskContext.Provider>
-                    <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask}}>
+                    <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask, tickingServiceTask, setTickingServiceTask}}>
                         { servicetasks.loading ? 'Loading' : <MapData data={servicetasks.serviceTasksData} tasksDispatch={servicetasksDispatch} setDeleteServiceTask={setDeleteServiceTask} />}
                     </ServiceTaskContext.Provider>  
                 </div>

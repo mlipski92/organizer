@@ -26,13 +26,13 @@ export const addItem = (req, res) => {
     })
 }
 
-// export const tickItem = (req, res) => {
-//     const update = "UPDATE tasks SET status = 2 WHERE id = " + req.params.id;
-//     db.query(update, (err, data) => {
-//         if(err) return res.json(err);
-//         return res.status(200).json(data);
-//     })
-// }
+export const tickItem = (req, res) => {
+    const update = "UPDATE servicetasks SET status = 2 WHERE id = " + req.params.id;
+    db.query(update, (err, data) => {
+        if(err) return res.json(err);
+        return res.status(200).json(data);
+    })
+}
 
 // export const holdItem = (req, res) => {
 //     const q = "UPDATE tasks SET whyholded = '"+req.body.whyHolded+"' WHERE id = " + req.params.id;
