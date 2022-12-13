@@ -18,9 +18,10 @@ const ServiceTasksPage = () => {
     const [servicetasks, servicetasksDispatch] = useReducer(serviceTasksReducer, initialServiceTasksState);
     const [addingServiceTask, setAddingServiceTask] = useState(serviceTaskObject.addingServiceTask);
     const [currentProject, setCurrentProject] = useState(serviceTaskObject.currentProject);
-    const [deleteServiceTask, setDeleteServiceTask] = useState(serviceTaskObject.deleteTask);
+    const [deleteServiceTask, setDeleteServiceTask] = useState(serviceTaskObject.deleteServiceTask);
 
     useEffect( () => {
+        console.log(deleteServiceTask)
         axios.post(`http://localhost:8800/servicetasks/get/${id}`)
         .then(response => {
             servicetasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
@@ -41,7 +42,7 @@ const ServiceTasksPage = () => {
                     <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject}}>
                         <div className="mainPart__main-title"><AddServiceTask /></div>
                     </ServiceTaskContext.Provider>
-                    <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask}}>
+                    <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask}}>
                         { servicetasks.loading ? 'Loading' : <MapData data={servicetasks.serviceTasksData} tasksDispatch={servicetasksDispatch} setDeleteServiceTask={setDeleteServiceTask} />}
                     </ServiceTaskContext.Provider>  
                 </div>

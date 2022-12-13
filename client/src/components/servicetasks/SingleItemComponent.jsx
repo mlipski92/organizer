@@ -21,8 +21,11 @@ const SingleItem = (props) => {
     const {serviceTasksDispatch} = useContext(ServiceTaskContext);
     const {deleteServiceTask, setDeleteServiceTask} = useContext(ServiceTaskContext);
 
+    
+
     const askDeleteServiceTaskHandler = (id) => {
         setDeleteServiceTask(id);
+        // console.log(setDeleteServiceTask)
     }
     
     return(
