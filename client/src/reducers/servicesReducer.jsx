@@ -12,6 +12,12 @@ const servicesReducer = (state, action) => {
                 servicesData: [...state.servicesData, action.payload],
                 error: ''
             }
+        case 'DELETE_SUCCESS':
+            return {
+                loading: false,
+                servicesData: state.servicesData.filter( el => el.id !== action.payload),
+                error: ''
+            }
         default:
             return state
     }
