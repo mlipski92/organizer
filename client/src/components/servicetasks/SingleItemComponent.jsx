@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useContext } from "react";
+
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
+
 import TickServiceTask from "./TickComponent";
-// import { TaskContext } from "../../contexts/TasksContext";
 
 const DeleteButton = (props) => (
     <>
@@ -26,7 +27,6 @@ const SingleItem = (props) => {
 
     const askDeleteServiceTaskHandler = (id) => {
         setDeleteServiceTask(id);
-        // console.log(setDeleteServiceTask)
     }
     
     return(
@@ -41,7 +41,7 @@ const SingleItem = (props) => {
                                         <div className="mainPart__rows">
                                             <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--task">{props.title} {props.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
+                                                    <strong className="mainPart__item-title--task">{props.elData.title} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
                                                 <span className="mainPart__users">Jakub Lipiński | Mateusz Lipski</span>
@@ -49,7 +49,7 @@ const SingleItem = (props) => {
                                                 <div className="mainPart__status"><strong>{ props.elData.status === 2 ? "ZAFAKTUROWANO" : null }</strong></div>
                                                 
                                                 <div className="buttons-list">
-                                                    { props.elData.status !== 2 ? <TickServiceTask id={props.id} itemData={props.itemData}  data={props.data} servicetasksDispatch={props.servicetasksDispatch} /> : null}
+                                                    { props.elData.status !== 2 ? <TickServiceTask id={props.id} itemData={props.elData}  data={props.data} servicetasksDispatch={props.servicetasksDispatch} /> : null}
                                                     <DeleteButton askDeleteServiceTaskHandler={askDeleteServiceTaskHandler} id={props.id} />
                                                 </div> 
                                                 

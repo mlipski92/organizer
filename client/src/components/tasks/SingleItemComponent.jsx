@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
+
 import { TaskContext } from "../../contexts/TasksContext";
 import TickTask from "./TickComponent";
 
@@ -71,35 +72,27 @@ const WhyHoldedInfo = (props) => (
 
 
 const SingleItem = (props) => {
-    // const {setDeleteTask, deleteTask} = useContext(TaskContext);
     const {deleteTask, setDeleteTask} = useContext(TaskContext);
     const {holdedTask, setHoldedTask} = useContext(TaskContext);
     const {tasksDispatch} = useContext(TaskContext);
 
     const askDeleteTaskHandler = (id) => {
         setDeleteTask(id);
-        console.log("new"+holdedTask)
     }
 
     const askHoldedTaskHandler = (id) => {
         setHoldedTask(id);
-        console.log(holdedTask)
     }
 
     const resumeTaskHandler = () => {
         saveChangesHandler(props.id);
-        console.log("testr");
     }
 
     const saveChangesHandler = async (id) => {
 
-       console.log("idf: "+ id);
             await axios.post("http://localhost:8800/tasks/hold/"+id, { whyHolded: '' })
             .then(response => {
                 tasksDispatch({ type: 'RESUME_SUCCESS', payload: id });
-                // setHoldedTask(null);
-                // console.log(holdedTask);
-
             })
             .catch(error => {
                 console.log(error);
@@ -119,20 +112,19 @@ const SingleItem = (props) => {
                                         <div className="mainPart__rows">
                                             <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--task">{props.title} {props.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
+                                                    <strong className="mainPart__item-title--task">{props.elData.title} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
                                                 <span className="mainPart__users">Jakub Lipiński | Mateusz Lipski</span>
                                                 
                                                 <div className="buttons-list">
-                                                    { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.itemData}  data={props.data} tasksDispatch={props.tasksDispatch} /> : null}
+                                                    { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.elData}  data={props.data} tasksDispatch={tasksDispatch} /> : null} 
                                                     { props.elData.whyholded !== '' ? <ResumeTask askHoldedTaskHandler={askHoldedTaskHandler} resumeTaskHandler={resumeTaskHandler} id={props.id} /> : null}
-                                                    {/* { props.elData.whyholded } */}
                                                     { props.elData.whyholded !== '' || props.elData.status === 2 ? null : <HoldButton askHoldedTaskHandler={askHoldedTaskHandler} data={props.data} id={props.id} />}
                                                     <DeleteButton askDeleteTaskHandler={askDeleteTaskHandler} id={props.id} />
                                                 </div>
 
-                                                {props.whyholded !== '' ? <WhyHoldedInfo whyholded={props.whyholded} /> : null}
+                                                {props.elData.whyholded !== '' ? <WhyHoldedInfo whyholded={props.elData.whyholded} /> : null} 
                                                 
                                                
                                             

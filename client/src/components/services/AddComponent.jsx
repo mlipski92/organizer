@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useContext } from "react";
+
 import { ServicesContext } from "../../contexts/ServicesContext";
-
-
-
 
 export const AddService = () => {
     const { addingService, setAddingService } = useContext(ServicesContext);
@@ -44,18 +42,12 @@ export const AddService = () => {
 export const AddServiceModal = (props) => {
     const name = useRef(true);
     const { addingService, setAddingService, servicesDispatch } = useContext(ServicesContext);
-    // const { setMessage } = useContext(ProjectContext);
-
 
     const inputChangeHandler = e => {
         setAddingService({
                 ...addingService, [name.current.name]: e.target.value
         });    
     }
-
-    useEffect(() => {
-        console.log("Service dispath:" + JSON.stringify(addingService));
-    },[])
 
     const saveServiceHandler = async e => {
         const { name } = e.target;
@@ -66,12 +58,10 @@ export const AddServiceModal = (props) => {
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
                 servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
-                // console.log("addingProject"+ addingProject.id);
                 setAddingService(null);
                 
             })
             .catch(error => {
-                // setMessage('test')
                 console.log(error);
             })
         }

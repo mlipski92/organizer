@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
+import { TaskContext, taskObject } from '../contexts/TasksContext';
+import tasksReducer from '../reducers/tasksReducer';
+
 import { AddTask, AddTaskModal } from '../components/tasks/AddComponent';
 import DeleteModal from '../components/tasks/DeleteComponent';
 import OnHoldModal from '../components/tasks/HoldComponent';
 import MapData from '../components/tasks/MapDataComponent';
-import { TaskContext, taskObject } from '../contexts/TasksContext';
-import tasksReducer from '../reducers/tasksReducer';
+
 
 const initialTasksState = {
     loading: true,
@@ -43,7 +46,7 @@ const TasksPage = () => {
                 </TaskContext.Provider>
                 <div className="mainPart__list">
                     <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask}}>
-                        { tasks.loading ? 'Loading' : <MapData data={tasks.tasksData} tasksDispatch={tasksDispatch} />}
+                        { tasks.loading ? 'Loading' : <MapData data={tasks.tasksData} />}
                     </TaskContext.Provider>  
                 </div>
             </div>

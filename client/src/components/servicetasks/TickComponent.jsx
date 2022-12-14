@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
+
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
 
 const TickServiceTask = (props) => {
@@ -19,9 +20,6 @@ const TickServiceTask = (props) => {
             console.log(error);
         })
         setTickingServiceTask(null);
-        // props.setArchivingProject(null);
-
-        // console.log("archiving "+props.)
 
     }
 

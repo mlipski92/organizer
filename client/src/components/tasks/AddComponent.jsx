@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useContext } from "react";
+
 import { TaskContext } from "../../contexts/TasksContext";
 
 
@@ -49,8 +50,6 @@ export const AddTaskModal = (props) => {
     const title = useRef(true);
     const { addingTask, setAddingTask, tasksDispatch } = useContext(TaskContext);
     const { currentProject, setCurrentProject } = useContext(TaskContext);
-    // const { setMessage } = useContext(ProjectContext);
-    // setCurrentProject(33);
 
     const inputChangeHandler = e => {
         setAddingTask({
@@ -58,18 +57,12 @@ export const AddTaskModal = (props) => {
         });    
     }
 
-    useEffect(() => {
-        
-        console.log(currentProject);
-    },[])
-
     const saveTaskHandler = async e => {
         const { name } = e.target;
         if (name === "cancelSave") {
             setAddingTask(null);
         } else if (name === 'confirmSave') {
         
-            // await axios.post('http://localhost:8800/tasks/add', {title: addingTask.title})
             await axios.post('http://localhost:8800/tasks/add', {
                 id: null,
                 title: addingTask.title,
@@ -86,7 +79,6 @@ export const AddTaskModal = (props) => {
                 console.log("asdas  "+JSON.stringify(response));
             })
             .catch(error => {
-                // setMessage('test')
                 console.log(error);
             })
         }

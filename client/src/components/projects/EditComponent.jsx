@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useContext, useRef } from "react";
+
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
 const EditModal = (props) => {
     const name = useRef(true);
     const {editingProject, setEditingProject, projectsDispatch, setMessage} = useContext(ProjectContext);
+
     const inputChangeHandler = e => {
         setEditingProject({
                 ...editingProject, [name.current.name]: e.target.value
@@ -27,8 +29,6 @@ const EditModal = (props) => {
         } else if (e.target.name === "cancelSave") {
             setEditingProject(null);
         }
-        
-
         
     }
 

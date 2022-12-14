@@ -41,9 +41,9 @@ export const AddProject = () => {
 
 export const AddProjectModal = (props) => {
     const name = useRef(true);
+
     const { addingProject, setAddingProject, projectsDispatch } = useContext(ProjectContext);
     const { setMessage } = useContext(ProjectContext);
-
 
     const inputChangeHandler = e => {
         setAddingProject({
@@ -51,12 +51,9 @@ export const AddProjectModal = (props) => {
         });    
     }
 
-    useEffect(() => {
-        console.log(projectsDispatch);
-    },[])
-
     const saveProjectHandler = async e => {
         const { name } = e.target;
+
         if (name === "cancelSave") {
             setAddingProject(null);
         } else if (name === 'confirmSave') {
@@ -66,7 +63,6 @@ export const AddProjectModal = (props) => {
                 projectsDispatch({ type: 'ADD_SUCCESS', payload: addingProject });
                 console.log("addingProject"+ addingProject.id);
                 setAddingProject(null);
-                
             })
             .catch(error => {
                 // setMessage('test')

@@ -33,9 +33,6 @@ const ServicesPage = () => {
           servicesDispatch({ type: 'FETCH_ERROR' })
       })
     },[])
-
-    // console.log(services.loading ? 'Loading' : services.servicesData);
-    // const test = "test";
  
   return (
     <div>

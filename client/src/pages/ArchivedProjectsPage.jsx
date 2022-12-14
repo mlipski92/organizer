@@ -1,9 +1,10 @@
 import { useEffect, useReducer, useState } from "react";
 import axios from 'axios';
+
 import projectsReducer from "../reducers/projectsReducer";
-import MapData from "../components/archivedProjects/MapDataComponent";
-import ProjectsPage from "./ProjectsPage";
 import { projectObject } from "../contexts/ProjectsContext";
+
+import MapData from "../components/archivedProjects/MapDataComponent";
 
 const initialProjectsState = {
     loading: true,
@@ -14,7 +15,7 @@ const initialProjectsState = {
 
 const ArchivedProjectsPage = () => {
     const [ projects, projectsDispatch ] = useReducer(projectsReducer, initialProjectsState);
-    const [resumingProject, setResumingProject] = useState(projectObject.resumingProject);
+    const [ resumingProject, setResumingProject] = useState(projectObject.resumingProject);
 
     useEffect(() => {
         axios.post("http://localhost:8800/projects/archived")

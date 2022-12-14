@@ -1,14 +1,13 @@
 import React, { useReducer, useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 
+import { ProjectContext, projectObject } from '../contexts/ProjectsContext';
+import projectsReducer from '../reducers/projectsReducer';
+
+import MapData from '../components/projects/MapDataComponent';
 import EditModal from '../components/projects/EditComponent';
 import DeleteModal from '../components/projects/DeleteComponent';
-import MapData from '../components/projects/MapDataComponent';
-
-import projectsReducer from '../reducers/projectsReducer';
 import {AddProject, AddProjectModal} from '../components/projects/AddComponent';
-
-import { ProjectContext, projectObject } from '../contexts/ProjectsContext';
 import MessageComponent from '../components/projects/MessageComponent';
 
 const initialProjectsState = {
@@ -36,7 +35,6 @@ const ProjectsPage = () => {
         })
     },[])
 
-console.log(23455);
   return (
     <div>
             <ProjectContext.Provider value={{setAddingProject, addingProject ,setMessage, projectsDispatch}}>
@@ -47,13 +45,10 @@ console.log(23455);
                 {projects.loading ? 'Loading' : <MapData data={projects.projectsData} />}
             </ProjectContext.Provider>
 
-            {projects.error ? projects.error : null}
-
             <ProjectContext.Provider value={{editingProject, setEditingProject, projectsDispatch, setMessage}}>
                 {editingProject !== null ? <EditModal /> : null}
             </ProjectContext.Provider>
             
-
             <ProjectContext.Provider value={{deleteProject, setDeleteProject, projectsDispatch, setMessage}}>
                 {deleteProject !== null ? <DeleteModal /> : null}
             </ProjectContext.Provider>

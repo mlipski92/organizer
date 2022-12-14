@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { TaskContext } from "../../contexts/TasksContext";
 
@@ -31,7 +30,6 @@ const DeleteModal = (props) => {
     const askDeleteTaskHandler = (id) => {
         setDeleteTask(id);
     }
-
 
     return (
         <>

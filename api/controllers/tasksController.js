@@ -11,7 +11,6 @@ export const getAll = (req, res) => {
 
 export const deleteItem = (req, res) => {
     const showRecord = "DELETE FROM tasks WHERE id = " + req.params.id;
-    // const showRecord = "DELETE FROM tasks WHERE id = 3"
     db.query(showRecord, (err, data) => {
         if(err) return res.json(err);
         return res.status(200).json(data);
@@ -20,10 +19,8 @@ export const deleteItem = (req, res) => {
 
 export const addItem = (req, res) => {
     const q = "INSERT INTO tasks (id, title, user, prior, project, status, whyholded) VALUES (null, '"+req.body.title+"', "+req.body.user+", "+req.body.prior+", "+req.body.project+", 1, '"+req.body.whyholded+"')"
-    // const q = "INSERT INTO tasks (id, title, user, prior, project, status, whyholded) VALUES (null, '"+req.body.title+"', "+req.body.user+", "+req.body.prior+", 109, 1, 'sdf')"
     db.query(q, (err, data) => {
         if(err) return res.json(err);
-        // return res.status(200).json({title: req.body.title, id: req.body.id});
         return res.status(200).json(data.data);
     })
 }
@@ -42,5 +39,4 @@ export const holdItem = (req, res) => {
        if (err) return res.json(err);
        return res.status(200).json(data);
     })
-    // return res.status(200).json(123);
 }

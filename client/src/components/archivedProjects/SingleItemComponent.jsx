@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+
 import ResumeComponent from './ResumeComponent';
 
 const SingleItem = (props) => {
@@ -14,10 +15,8 @@ const SingleItem = (props) => {
                         <div className="mainPart__rows">
                             <div className="mainPart__row">
                                     <span className="mainPart__item-basic-info">
-                                        <strong className="mainPart__item-title--project">{props.name}</strong>
-                                        Jakub Lipiński | Mateusz Lipski
+                                        <strong className="mainPart__item-title--project">{props.elData.name}</strong>
                                     </span>
-                                {/* <Link to={"/tasks/" + props.id}><p>Zobacz rekordy</p></Link> */}
                                 <div className="buttons-list">
                                     <Link to={"/tasks/" + props.id} className="buttons-list__item">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.607 170.731">
@@ -33,14 +32,14 @@ const SingleItem = (props) => {
                                 </div>
                             </div>
                             <div className="mainPart__row">
-                                <div className="mainPart__progress--done" data={props.data}>
+                                <div className="mainPart__progress--done">
                                     Zarchiwizowane
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="mainPart__column itemNavi">
-                        <ResumeComponent projectsDispatch={props.projectsDispatch} id={props.id} name={props.name} setResumingProject={props.setResumingProject} />
+                        <ResumeComponent projectsDispatch={props.projectsDispatch} id={props.id} name={props.elData.name} setResumingProject={props.setResumingProject} />
                     </div>
                 </div>
             </div>

@@ -4,7 +4,6 @@ import { ProjectContext } from "../../contexts/ProjectsContext";
 
 const MessageComponent = () => {
     const { message, setMessage } = useContext(ProjectContext);
-    //console.log(message);
     const classNames = "messages " + (message !== null ? message.type : null);
 
     useEffect(() => {

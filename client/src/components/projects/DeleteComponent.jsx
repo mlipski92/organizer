@@ -10,7 +10,6 @@ const DeleteModal = (props) => {
     const deleteProjectHandler = async e => {
         const { name } = e.target;
         
-        
         if ( name === "confirmDelete") {
             await axios.post("http://localhost:8800/projects/delete/" + deleteProject)
             .then(response => {
@@ -20,6 +19,7 @@ const DeleteModal = (props) => {
             .catch(error => {
                 console.log(0);
             })
+
             await axios.post("http://localhost:8800/projects/deleteCommonTasks/" + deleteProject)
             .then(response => {
                 console.log(1);
@@ -28,7 +28,6 @@ const DeleteModal = (props) => {
                 console.log(0);
             })
             setDeleteProject(null);
-
         } else if (name === "cancelDelete") {
             setDeleteProject(null);
         }

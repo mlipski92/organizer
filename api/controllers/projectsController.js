@@ -42,15 +42,6 @@ export const archiveItem = (req, res) => {
     })
 }
 
-// export const archiveItem = (req, res) => {
-//     const showRecord = "DELETE FROM projects WHERE id = " + req.params.id;
-//     db.query(showRecord, (err, data) => {
-//         if(err) return res.json(err);
-//         return res.status(200).json(data);
-//     })
-//     return res.status(200).json(req.params);
-// }
-
 export const resumeItem = (req, res) => {
     const showRecord = "UPDATE projects SET status = 1 WHERE id = " + req.params.id;
     db.query(showRecord, (err, data) => {

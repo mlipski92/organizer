@@ -7,7 +7,6 @@ router.post('/all', getAll);
 router.post('/archive/:id', archiveItem);
 router.post('/edit/:id', editItem);
 router.post('/add', addItem);
-// router.post('/insert', insert);
 router.post('/archived', archived);
 router.post('/resume/:id', resumeItem);
 router.post('/delete/:id', deleteItem);

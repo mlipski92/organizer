@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useContext } from "react";
+
 import { TaskContext } from "../../contexts/TasksContext";
 
 const TickTask = (props) => {
     const { tasks, tasksDispatch } = useContext(TaskContext);
     const { tickingTask, setTickingTask } = useContext(TaskContext);
-
 
     const tickTaskHandler = async e => {
         await setTickingTask(props.id);
@@ -19,12 +19,8 @@ const TickTask = (props) => {
             console.log(error);
         })
         setTickingTask(null);
-        // props.setArchivingProject(null);
-
-        // console.log("archiving "+props.)
 
     }
-
 
     return (
         <>

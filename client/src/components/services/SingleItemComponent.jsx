@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+
 import { ServicesContext } from '../../contexts/ServicesContext';
 
 const SingleItem = (props) => {
@@ -50,7 +51,7 @@ const SingleItem = (props) => {
                                     </div>
                                 </div>
                                 <div className="mainPart__column itemNavi">
-                                    {/* <ArchiveProject projectsDispatch={projectsDispatch} archivingProject={archivingProject} name={props.name} setArchivingProject={setArchivingProject} id={props.id} /> */}
+                                 
                                 </div>
                             </div>
                         </div>

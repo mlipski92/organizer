@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useContext } from "react";
+
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
 
 
@@ -20,7 +21,6 @@ export const AddServiceTask = () => {
 
             }
         );
-        console.log("title22: "+currentProject);
     }
 
 
@@ -50,20 +50,12 @@ export const AddServiceTaskModal = (props) => {
     const time = useRef(true);
     const { addingServiceTask, setAddingServiceTask, servicetasksDispatch } = useContext(ServiceTaskContext);
     const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
-    // const { setMessage } = useContext(ProjectContext);
-    // setCurrentProject(33);
 
     const inputChangeHandler = e => {
-        //  console.log();
         setAddingServiceTask({
                 ...addingServiceTask, [e.target.name]: e.target.value
         });    
     }
-
-    useEffect(() => {
-        
-        console.log(currentProject);
-    },[])
 
     const saveServiceTaskHandler = async e => {
         const { name } = e.target;
@@ -82,10 +74,8 @@ export const AddServiceTaskModal = (props) => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
                 servicetasksDispatch({ type: 'ADD_SUCCESS', payload: addingServiceTask });
                 setAddingServiceTask(null);
-                console.log("asdas  "+JSON.stringify(response));
             })
             .catch(error => {
-                // setMessage('test')
                 console.log(error);
             })
         }

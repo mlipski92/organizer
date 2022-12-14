@@ -34,8 +34,7 @@ const SingleItem = (props) => {
                                     <div className="mainPart__rows">
                                         <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--project">{props.name} ({props.id})</strong>
-                                                    Jakub Lipiński | Mateusz Lipski
+                                                    <strong className="mainPart__item-title--project">{props.elData.name} ({props.id})</strong>
                                                 </span>
                                                 <div className="buttons-list">
                                                     <Link to={"/tasks/" + props.id} className="buttons-list__item">
@@ -76,9 +75,6 @@ const SingleItem = (props) => {
                                                         </span>
                                                     </div>
                                                 </div>
-                                            {/* <Link to={"/tasks/" + props.id}><p>Zobacz rekordy</p></Link>
-                                            <p onClick={() => {editButtonHandler(props.data.filter(el => el.id === props.id)[0]) } }>Edycja</p>
-                                            <p onClick={() => {askDeleteProjectHandler(props.id)}}>Usuń</p> */}
                                         </div>
                                         <div className="mainPart__row">
                                             <div className="mainPart__progress--done" data={props.data}>

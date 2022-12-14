@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useContext, useRef } from "react";
+
 import { TaskContext } from "../../contexts/TasksContext";
 
 const OnHoldModal = (props) => {
     const whyHolded = useRef(true);
     const {holdedTask, setHoldedTask, tasksDispatch} = useContext(TaskContext);
+
     const inputChangeHandler = e => {
         setHoldedTask({
                 ...holdedTask, [whyHolded.current.name]: e.target.value
@@ -13,13 +15,10 @@ const OnHoldModal = (props) => {
 
     const saveChangesHandler = async e => {
         if (e.target.name === "confirmSave") {
-
-            console.log(holdedTask.id);
        
             await axios.post("http://localhost:8800/tasks/hold/"+holdedTask.id, { whyHolded: holdedTask.whyholded })
             .then(response => {
                 tasksDispatch({ type: 'HOLD_SUCCESS', payload: holdedTask });
-                // setMessage({msg: "Projekt został edytowany!", type: "SUCCESS"});
                 setHoldedTask(null);
             })
             .catch(error => {
@@ -29,9 +28,7 @@ const OnHoldModal = (props) => {
         } else if (e.target.name === "cancelSave") {
             setHoldedTask(null);
         }
-        
-
-        
+           
     }
 
     return (
