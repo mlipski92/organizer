@@ -9,6 +9,7 @@ import { AddTask, AddTaskModal } from '../components/tasks/AddComponent';
 import DeleteModal from '../components/tasks/DeleteComponent';
 import OnHoldModal from '../components/tasks/HoldComponent';
 import MapData from '../components/tasks/MapDataComponent';
+import projectsReducer from '../reducers/projectsReducer';
 
 
 const initialTasksState = {
@@ -17,14 +18,23 @@ const initialTasksState = {
     tasksData: { }
 }
 
+const initialProjectsState = {
+    loading: true,
+    error: '',
+    projectsData: {}
+}
+
 const TasksPage = () => {
     const { id } = useParams();
     const [tasks, tasksDispatch] = useReducer(tasksReducer, initialTasksState);
+    const [projects, projectsDispatch] = useReducer(projectsReducer, initialProjectsState);
     const [deleteTask, setDeleteTask] = useState(taskObject.deleteTask);
     const [addingTask, setAddingTask] = useState(taskObject.addingTask);
     const [tickingTask, setTickingTask] = useState(taskObject.tickingTask);
     const [currentProject, setCurrentProject] = useState(taskObject.currentProject);
     const [holdedTask, setHoldedTask] = useState(taskObject.holdedTask);
+    const [currentProjectName, setCurrentProjectName] = useState(null);
+
 
     useEffect( () => {
         axios.post(`http://localhost:8800/tasks/get/${id}`)
@@ -37,9 +47,33 @@ const TasksPage = () => {
         
     }, []);
 
+    useEffect(() => {
+        axios.post('http://localhost:8800/projects/all')
+        .then(response => {
+            projectsDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+            currentProjectNameHandler(id, response.data);
+        })
+        .catch(error => {
+            projectsDispatch({ type: 'FETCH_ERROR' })
+        })
+    },[])
+
+    const currentProjectNameHandler = (id, data) => {
+        data.forEach(el => {
+            if (el.id === parseInt(id)) {
+                setCurrentProjectName(el.name);
+            }
+        });
+    }
+
+
+
 
     return (
         <>
+            <div className="mainPart__currentProject">
+                {currentProjectName}
+            </div>
             <div className="mainPart__projects">
                 <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject}}>
                     <div className="mainPart__main-title"><AddTask /></div>

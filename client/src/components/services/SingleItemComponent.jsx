@@ -6,7 +6,6 @@ import { ServicesContext } from '../../contexts/ServicesContext';
 const SingleItem = (props) => {
     const { servicesDispatch } = useContext(ServicesContext);
     const { deleteService, setDeleteService } = useContext(ServicesContext);
-    // console.log(JSON.stringify(props.elData));
 
     const askDeleteServiceHandler = (id) => {
         setDeleteService(id);
@@ -44,9 +43,7 @@ const SingleItem = (props) => {
                                                 <Link to={"/servicetasks/"+props.elData.id}>Zobacz rekordy</Link>
                                         </div>
                                         <div className="mainPart__row">
-                                            <div className="mainPart__progress--done">
-                                                W toku
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>

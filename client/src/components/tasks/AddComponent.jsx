@@ -48,17 +48,36 @@ export const AddTask = () => {
 
 export const AddTaskModal = (props) => {
     const title = useRef(true);
+    const prior = useRef(true);
+
     const { addingTask, setAddingTask, tasksDispatch } = useContext(TaskContext);
     const { currentProject, setCurrentProject } = useContext(TaskContext);
 
     const inputChangeHandler = e => {
         setAddingTask({
-                ...addingTask, [title.current.name]: e.target.value
-        });    
+                ...addingTask, [e.target.name]: e.target.value
+        });  
+        console.log(e.target.name+" "+e.target.value);  
+    }
+
+    const priorHandler = e => {
+        if(e.target.checked === true) {
+            setAddingTask({
+                ...addingTask, prior: 1
+            });  
+        } else {
+            setAddingTask({
+                ...addingTask, prior: 0
+            });  
+        }
     }
 
     const saveTaskHandler = async e => {
         const { name } = e.target;
+
+     
+       
+
         if (name === "cancelSave") {
             setAddingTask(null);
         } else if (name === 'confirmSave') {
@@ -76,7 +95,6 @@ export const AddTaskModal = (props) => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
                 tasksDispatch({ type: 'ADD_SUCCESS', payload: addingTask });
                 setAddingTask(null);
-                console.log("asdas  "+JSON.stringify(response));
             })
             .catch(error => {
                 console.log(error);
@@ -107,6 +125,10 @@ export const AddTaskModal = (props) => {
                                                     type="text" 
                                                     className="addModal__input" 
                                                 />
+                                                <label>
+                                                    <input type="checkbox" ref={prior} onClick={priorHandler} />
+                                                    <span>Wysoki priorytet</span>
+                                                </label>
                                                 </div>
                                             <div className="addModal__form-item">
                                                 <div className="addModal__buttons">

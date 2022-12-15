@@ -14,7 +14,6 @@ const initialServicesState = {
     servicesData: {}
 }
 
-console.log(123);
  
 const ServicesPage = () => {
   const [services, servicesDispatch] = useReducer(servicesReducer, initialServicesState);

@@ -8,6 +8,7 @@ import serviceTasksReducer from '../reducers/serviceTasksReducer';
 import { AddServiceTask, AddServiceTaskModal } from '../components/servicetasks/AddComponent';
 import DeleteModal from '../components/servicetasks/DeleteComponent';
 import MapData from '../components/servicetasks/MapDataComponent';
+import SumTimeComponent from '../components/servicetasks/SumTimeComponent';
 
 
 const initialServiceTasksState = {
@@ -25,7 +26,6 @@ const ServiceTasksPage = () => {
     const [tickingServiceTask, setTickingServiceTask] = useState(serviceTaskObject.tickingServiceTask);
 
     useEffect( () => {
-        console.log(deleteServiceTask)
         axios.post(`http://localhost:8800/servicetasks/get/${id}`)
         .then(response => {
             servicetasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
@@ -58,6 +58,9 @@ const ServiceTasksPage = () => {
             <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject}}>
                 { addingServiceTask !== null ? <AddServiceTaskModal /> : null}
             </ServiceTaskContext.Provider>
+
+            { servicetasks.loading ? 'Loading' : <SumTimeComponent allTasks={servicetasks.serviceTasksData} /> }
+            
         </>
     )
 }

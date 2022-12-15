@@ -8,15 +8,28 @@ import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router
 import MainNavi from './components/MainNavi';
 import ServicesPage from './pages/ServicesPage';
 import ServiceTasksPage from './pages/ServiceTasksPage';
+import LoginPage from './pages/LoginPage';
+import { useEffect } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MainLayout = () => {
+  const { isAuthenticated } = useAuth0();
+  const  { isLoading, error } = useAuth0();
+
+  useEffect(() => {
+    console.log(isAuthenticated ? 'zalog' : 'niezalog');
+    
+    
+    
+  }, [])
+
   return (
     <>
             <div className="mainApp">
                 <div className="mainApp__header">
                     <div className="mainApp__header-columns">
                         <div className="mainApp__header-column">
-                            fsdf
+                            Test: {isAuthenticated ? 'zalogowany' : 'niezalogowany'}
                         </div>
                         <div className="mainApp__header-column userNavi">
                             <div className="userNavi__container">
@@ -112,6 +125,10 @@ const router = createBrowserRouter([
       {
         path: '/servicetasks/:id',
         element: <ServiceTasksPage />
+      },
+      {
+        path: '/login',
+        element: <LoginPage />
       }
     ]
   }
