@@ -364,6 +364,19 @@ body {
 .userNavi {
     justify-content: flex-end;
     align-items: center;
+    &__login-button {
+        background-color: #e88f00;
+        border: 1px solid #894d18;
+        padding: 13px 30px;
+        border-radius: 5px;
+        float: right;
+
+        color:#393939;
+        font-size: 18px;
+        font-weight: 700;
+        font-family: 'Quicksand', sans-serif;
+        text-decoration: none; 
+    }
     &__columns {
         display: flex;
         width: 100%;
@@ -394,6 +407,7 @@ body {
         font-weight: 400;
         font-family: 'Quicksand', sans-serif;
         text-decoration: none; 
+        display: block;
     }
     &__container {
         width: 260px;

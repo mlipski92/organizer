@@ -22,13 +22,16 @@ const LogoutButton = (props) => {
     )
 }
 
+
+
 const LoginPage = () => {
-    const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+    const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
     return (
         <>
             <LoginButton loginWithRedirect={loginWithRedirect} isAuthenticated={isAuthenticated} />
             <LogoutButton isAuthenticated={isAuthenticated} logout={logout} />
+            {JSON.stringify(user)}
         </>
     )
     

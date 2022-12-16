@@ -5,23 +5,80 @@ import ProjectsPage from './pages/ProjectsPage';
 import ArchivedProjectsPage from './pages/ArchivedProjectsPage';
 import TasksPage from './pages/TasksPage';
 import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom';
-import MainNavi from './components/MainNavi';
+import MainNavi from './components/layout/MainNavi';
 import ServicesPage from './pages/ServicesPage';
 import ServiceTasksPage from './pages/ServiceTasksPage';
 import LoginPage from './pages/LoginPage';
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from 'axios';
+
+import { UsersContext, usersObject } from './contexts/UsersContext';
+
+const UserBasicPanel = (props) => {
+  return (
+    <>
+      <div className="userNavi__columns">
+          <div className="userNavi__column userNavi__image">
+              <img src={props.img} alt="" className="userNavi__img" />
+          </div>
+          <div className="userNavi__column userNavi__info">
+              <div className="userNavi__inside">
+                <span className="userNavi__name">{props.name + " " + props.surname}</span>
+                <span onClick={ () => { props.logout() }} className="userNavi__logout">Wyloguj</span>
+              </div>
+          </div>
+      </div>
+    </>
+  )
+}
+
+const UserLoginButton = (props) => {
+  return (
+    <>
+      <button className="userNavi__login-button" onClick={props.loginWithRedirect}>
+          Zaloguj
+      </button>
+    </>
+  )
+}
+
+
 
 const MainLayout = () => {
-  const { isAuthenticated } = useAuth0();
-  const  { isLoading, error } = useAuth0();
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
+  const { isLoading, error } = useAuth0();
+  const [ currentUser, setCurrentUser ] = useState(usersObject.currentUser);
+
 
   useEffect(() => {
-    console.log(isAuthenticated ? 'zalog' : 'niezalog');
-    
-    
-    
-  }, [])
+    (async () => {
+      if (isAuthenticated) {
+        await axios.post('http://localhost:8800/users/getcurrent', { socialident: user.email })
+        .then(response => {
+            console.log("sprawdzanie");
+            if (response.data.length === 0) {
+              axios.post('http://localhost:8800/users/add', { name: user.given_name + " " + user.family_name, img: user.picture, socialident: user.email })
+              .then(response => {
+                console.log("Dodano użytkownika!");
+              })
+              .catch(error => {
+                console.log(error);
+              })
+            }
+            
+            
+        })
+        .catch(error => {
+            
+        })
+      } else {
+        console.log('niezalogowany');
+      }
+
+      setCurrentUser(user?.email)
+    })();
+  }, [isAuthenticated, setCurrentUser])
 
   return (
     <>
@@ -33,17 +90,7 @@ const MainLayout = () => {
                         </div>
                         <div className="mainApp__header-column userNavi">
                             <div className="userNavi__container">
-                                <div className="userNavi__columns">
-                                    <div className="userNavi__column userNavi__image">
-                                        <img src="img/tymczasowe_user.jpg" alt="" className="userNavi__img" />
-                                    </div>
-                                    <div className="userNavi__column userNavi__info">
-                                        <div className="userNavi__inside">
-                                            <span className="userNavi__name">Mateusz Lipski</span>
-                                            <a href="" className="userNavi__logout">Wyloguj</a>
-                                        </div>
-                                    </div>
-                                </div>
+                              { isAuthenticated ? <UserBasicPanel img={user?.picture} name={user?.given_name} surname={user?.family_name} logout={logout} /> : <UserLoginButton loginWithRedirect={loginWithRedirect} />}
                             </div>
                         </div>
                     </div>
