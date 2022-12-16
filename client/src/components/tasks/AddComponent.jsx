@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useState } from "react";
 import { useEffect, useRef, useContext } from "react";
 
 import { TaskContext } from "../../contexts/TasksContext";
+import { UsersContext, usersObject } from "../../contexts/UsersContext";
 
 
 
@@ -15,7 +17,7 @@ export const AddTask = () => {
             {
                 id: null,
                 title: '',
-                user: 1,
+                user: 0,
                 prior: 0,
                 project: currentProject,
                 status: 1,
@@ -52,11 +54,29 @@ export const AddTaskModal = (props) => {
 
     const { addingTask, setAddingTask, tasksDispatch } = useContext(TaskContext);
     const { currentProject, setCurrentProject } = useContext(TaskContext);
+    const { currentUser, setCurrentUser } = useContext(UsersContext);
+    const [ currentUserId, setCurrentUserId ] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            await axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
+            .then(response => {
+                setCurrentUserId(response.data[0].id);
+            })
+            .catch(error => {
+                console.log('Error');
+            })
+        })()
+        
+    })
+    
 
     const inputChangeHandler = e => {
+        console.log("current id: "+currentUserId);
         setAddingTask({
-                ...addingTask, [e.target.name]: e.target.value
+                ...addingTask, [e.target.name]: e.target.value, user: currentUserId
         });  
+     
         console.log(e.target.name+" "+e.target.value);  
     }
 
@@ -74,9 +94,9 @@ export const AddTaskModal = (props) => {
 
     const saveTaskHandler = async e => {
         const { name } = e.target;
-
-     
-       
+        
+        console.log(currentUser);
+        
 
         if (name === "cancelSave") {
             setAddingTask(null);

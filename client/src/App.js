@@ -106,7 +106,9 @@ const MainLayout = () => {
                                 <h2 className="mainApp__part-h2">Projekty</h2>
                             </div>
                             <div className="mainApp__part-body">
+                              <UsersContext.Provider value={{currentUser, setCurrentUser}}>
                                 <Outlet />
+                              </UsersContext.Provider> 
                             </div>
                         </div>
 

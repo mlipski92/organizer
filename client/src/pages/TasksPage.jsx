@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { TaskContext, taskObject } from '../contexts/TasksContext';
@@ -10,6 +10,8 @@ import DeleteModal from '../components/tasks/DeleteComponent';
 import OnHoldModal from '../components/tasks/HoldComponent';
 import MapData from '../components/tasks/MapDataComponent';
 import projectsReducer from '../reducers/projectsReducer';
+import { UsersContext, usersObject } from '../contexts/UsersContext';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 const initialTasksState = {
@@ -34,6 +36,7 @@ const TasksPage = () => {
     const [currentProject, setCurrentProject] = useState(taskObject.currentProject);
     const [holdedTask, setHoldedTask] = useState(taskObject.holdedTask);
     const [currentProjectName, setCurrentProjectName] = useState(null);
+    const {currentUser, setCurrentUser} = useContext(UsersContext);
 
 
     useEffect( () => {
@@ -44,6 +47,8 @@ const TasksPage = () => {
         }).catch(error => {
             console.log(error)
         })
+
+        console.log("current user: "+currentUser);
         
     }, []);
 
