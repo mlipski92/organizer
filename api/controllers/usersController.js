@@ -17,3 +17,11 @@ export const allItems = (req, res) => {
        return res.status(200).json(data);
     })
 }
+
+export const currentUserId = (req, res) => {
+    const q = `SELECT * FROM users WHERE id = "${req.params.id}"`;
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}

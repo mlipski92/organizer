@@ -88,6 +88,20 @@ const SingleItem = (props) => {
         saveChangesHandler(props.id);
     }
 
+    // const checkUserInfo = (id) => {
+    //     (async() => {
+    //         await axios.post("http://localhost:8800/users/getcurrentid/"+id)
+    //         .then(response => {
+    //             console.log(response.data[0].name)
+    //             return response.data[0].name;
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    //     })()
+        
+    // }
+
     const saveChangesHandler = async (id) => {
 
             await axios.post("http://localhost:8800/tasks/hold/"+id, { whyHolded: '' })
@@ -115,7 +129,7 @@ const SingleItem = (props) => {
                                                     <strong className="mainPart__item-title--task">{props.elData.title} {props.id} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
-                                                <span className="mainPart__users">Jakub Lipiński | Mateusz Lipski</span>
+                                                <span className="mainPart__users">{props.elData.name}</span>
                                                 
                                                 <div className="buttons-list">
                                                     { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.elData}  data={props.data} tasksDispatch={tasksDispatch} /> : null} 
@@ -126,11 +140,6 @@ const SingleItem = (props) => {
 
                                                 {props.elData.whyholded !== '' ? <WhyHoldedInfo whyholded={props.elData.whyholded} /> : null} 
                                                 
-                                               
-                                            
-                                                
-                                                
-                                              
                                             </div>
                                         </div>
                                     </div>

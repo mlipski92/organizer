@@ -113,6 +113,7 @@ export const AddTaskModal = (props) => {
             })
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+                console.log(response);
                 tasksDispatch({ type: 'ADD_SUCCESS', payload: addingTask });
                 setAddingTask(null);
             })
