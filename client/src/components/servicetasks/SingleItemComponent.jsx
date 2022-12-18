@@ -44,7 +44,7 @@ const SingleItem = (props) => {
                                                     <strong className="mainPart__item-title--task">{props.elData.title} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
-                                                <span className="mainPart__users">Jakub Lipiński | Mateusz Lipski</span>
+                                                <span className="mainPart__users">{props.elData.name}</span>
 
                                                 <div className="mainPart__status"><strong>{ props.elData.status === 2 ? "ZAFAKTUROWANO" : null }</strong></div>
                                                 

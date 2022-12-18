@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext, useState } from "react";
 
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
+import { UsersContext } from "../../contexts/UsersContext";
 
 
 
@@ -50,12 +51,28 @@ export const AddServiceTaskModal = (props) => {
     const time = useRef(true);
     const { addingServiceTask, setAddingServiceTask, servicetasksDispatch } = useContext(ServiceTaskContext);
     const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
+    const { currentUser, setCurrentUser } = useContext(UsersContext);
+    const [ currentUserId, setCurrentUserId ] = useState(null);
 
     const inputChangeHandler = e => {
         setAddingServiceTask({
-                ...addingServiceTask, [e.target.name]: e.target.value
-        });    
+                ...addingServiceTask, [e.target.name]: e.target.value, user: currentUserId
+        });  
     }
+
+    useEffect(() => {
+        (async () => {
+            await axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
+            .then(response => {
+                setCurrentUserId(response.data[0].id);
+                console.log(response.data[0].id);
+            })
+            .catch(error => {
+                console.log('Error');
+            })
+        })()
+        
+    })
 
     const saveServiceTaskHandler = async e => {
         const { name } = e.target;
@@ -68,7 +85,8 @@ export const AddServiceTaskModal = (props) => {
                 title: addingServiceTask.title,
                 time: addingServiceTask.time,
                 status: 1,
-                project: addingServiceTask.project
+                project: addingServiceTask.project,
+                user: addingServiceTask.user
             })
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});

@@ -2,7 +2,8 @@ import { db } from '../db.js';
 import mysql from 'mysql';
 
 export const getAll = (req, res) => {
-    const q = `SELECT * FROM servicetasks WHERE project = "${req.params.id}" ORDER BY status ASC`;
+    const q = `SELECT servicetasks.id, title, time, status, project, user, name from servicetasks INNER JOIN users ON servicetasks.user=users.id WHERE project = "${req.params.id}" `;
+
     db.query(q, (err, data) => {
        if (err) return res.json(err);
        return res.status(200).json(data);
