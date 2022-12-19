@@ -1,9 +1,10 @@
 import express from 'express';
-import { archiveItem, addItem, deleteCommonTasks, resumeItem, deleteItem, getAll, insert, archived, editItem } from "../controllers/projectsController.js";
+import { archiveItem, addItem, deleteCommonTasks, resumeItem, deleteItem, getAll, insert, archived, editItem, getLast } from "../controllers/projectsController.js";
 
 const router = express.Router();
 
 router.post('/all', getAll);
+router.post('/last', getLast);
 router.post('/archive/:id', archiveItem);
 router.post('/edit/:id', editItem);
 router.post('/add', addItem);

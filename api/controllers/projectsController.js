@@ -9,6 +9,14 @@ export const getAll = (req, res) => {
     })
 }
 
+export const getLast = (req, res) => {
+    const q = "SELECT * FROM `projects` ORDER BY id DESC LIMIT 1";
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
 export const archived = (req, res) => {
     const q = "SELECT * FROM projects WHERE status = 2";
     db.query(q, (err, data) => {

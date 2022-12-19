@@ -60,8 +60,20 @@ export const AddProjectModal = (props) => {
             await axios.post('http://localhost:8800/projects/add', {name: addingProject.name})
             .then( response => {
                 setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
-                projectsDispatch({ type: 'ADD_SUCCESS', payload: addingProject });
-                console.log("addingProject"+ addingProject.id);
+
+                axios.post('http://localhost:8800/projects/last')
+                .then(responseLast => {
+                    const { name, id } = responseLast.data[0];
+                        if(addingProject.name === name) {
+                            projectsDispatch({ type: 'ADD_SUCCESS', payload: {...addingProject, id:id} });
+                        } else {
+                            console.log('error przy dodawaniu');
+                        }   
+                        setAddingProject(null);     
+                })
+                .catch(error => {
+                    projectsDispatch({ type: 'FETCH_ERROR' })
+                })
                 setAddingProject(null);
             })
             .catch(error => {
