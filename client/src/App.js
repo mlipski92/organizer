@@ -43,6 +43,19 @@ const UserLoginButton = (props) => {
   )
 }
 
+const MainLogin = (props) => {
+  return (
+    <>
+      <div className="main-login">
+        <div className="main-login__inside">
+          <h1 className="main-login__title">Aplikacja Organizer</h1>
+          <button className="main-login__button" onClick={props.loginWithRedirect}>Zaloguj się</button>
+        </div>
+      </div>
+    </>
+  )
+}
+
 
 
 const MainLayout = () => {
@@ -65,9 +78,7 @@ const MainLayout = () => {
               .catch(error => {
                 console.log(error);
               })
-            }
-            
-            
+            }    
         })
         .catch(error => {
             
@@ -81,6 +92,7 @@ const MainLayout = () => {
   }, [isAuthenticated, setCurrentUser])
 
   return (
+    isAuthenticated ? (
     <>
             <div className="mainApp">
                 <div className="mainApp__header">
@@ -147,6 +159,7 @@ const MainLayout = () => {
                 </div>
             </div>
     </>
+    ) : <MainLogin loginWithRedirect={loginWithRedirect} />
   )
 }
 
