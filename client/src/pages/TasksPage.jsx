@@ -78,11 +78,8 @@ const TasksPage = () => {
 
     return (
         <>
-            <div className="mainPart__currentProject">
-                {currentProjectName}
-            </div>
             <div className="mainPart__projects">
-                <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage}}>
+                <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage, currentProjectName}}>
                     <div className="mainPart__main-title"><AddTask /></div>
                 </TaskContext.Provider>
                 <div className="mainPart__list">

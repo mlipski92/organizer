@@ -10,6 +10,8 @@ import DeleteModal from '../components/servicetasks/DeleteComponent';
 import MapData from '../components/servicetasks/MapDataComponent';
 import SumTimeComponent from '../components/servicetasks/SumTimeComponent';
 import MessageComponent from '../components/servicetasks/MessageComponent';
+import { useContext } from 'react';
+import { ServicesContext, servicesObject } from '../contexts/ServicesContext';
 
 
 const initialServiceTasksState = {
@@ -26,6 +28,8 @@ const ServiceTasksPage = () => {
     const [deleteServiceTask, setDeleteServiceTask] = useState(serviceTaskObject.deleteServiceTask);
     const [tickingServiceTask, setTickingServiceTask] = useState(serviceTaskObject.tickingServiceTask);
     const [message, setMessage] = useState(serviceTaskObject.message);
+    const [currentServiceName, setCurrentServiceName] = useState(null);
+    const [services, servicesDispatch] = useState(servicesObject);
 
     useEffect( () => {
         axios.post(`http://localhost:8800/servicetasks/get/${id}`)
@@ -38,13 +42,34 @@ const ServiceTasksPage = () => {
         
     }, []);
 
+    useEffect(() => {
+        axios.post('http://localhost:8800/services/all')
+        .then(response => {
+            servicesDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+            currentServiceNameHandler(id, response.data);
+        })
+        .catch(error => {
+            servicesDispatch({ type: 'FETCH_ERROR' })
+        })
+    },[]);
+
+    const currentServiceNameHandler = (id, data) => {
+        data.forEach(el => {
+            if (el.id === parseInt(id)) {
+                setCurrentServiceName(el.name);
+            }
+        });
+    }
+
 
     return (
         <>
+
+            { servicetasks.loading ? 'Loading' : <SumTimeComponent allTasks={servicetasks.serviceTasksData} /> }
        
             <div className="mainPart__projects">
                 <div className="mainPart__list">
-                    <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject, setMessage}}>
+                    <ServiceTaskContext.Provider value={{setAddingServiceTask, addingServiceTask, servicetasksDispatch, currentProject, setCurrentProject, setMessage, currentServiceName}}>
                         <div className="mainPart__main-title"><AddServiceTask /></div>
                     </ServiceTaskContext.Provider>
                     <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask, tickingServiceTask, setTickingServiceTask, setMessage}}>
@@ -64,8 +89,6 @@ const ServiceTasksPage = () => {
             <ServiceTaskContext.Provider value={{message, setMessage}}>
                 <MessageComponent />
             </ServiceTaskContext.Provider>
-
-            { servicetasks.loading ? 'Loading' : <SumTimeComponent allTasks={servicetasks.serviceTasksData} /> }
             
         </>
     )

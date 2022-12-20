@@ -15,8 +15,9 @@ const SumTimeComponent = (props) => {
 
     return (
         <>
-            <p>Łaczny czas niezafakturowanej pracy: <strong>{allTasksTime} minut</strong></p>
-            
+            <div className="mainPart__sumTime">
+                <span>Łaczny czas niezafakturowanej pracy: <strong>{allTasksTime} minut</strong></span>
+            </div>
         </>
     );
 }
