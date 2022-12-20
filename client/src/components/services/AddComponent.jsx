@@ -57,7 +57,23 @@ export const AddServiceModal = (props) => {
             await axios.post('http://localhost:8800/services/add', {name: addingService.name})
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
-                servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
+
+                axios.post('http://localhost:8800/services/last')
+                .then(responseLast => {
+                    const { name, id } = responseLast.data[0];
+                        if(addingService.name === name) {
+                            servicesDispatch({ type: 'ADD_SUCCESS', payload: {...addingService, id:id} });
+                        } else {
+                            console.log('error przy dodawaniu');
+                        }   
+                        setAddingService(null);     
+                })
+                .catch(error => {
+                    servicesDispatch({ type: 'FETCH_ERROR' })
+                })
+
+
+                // servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
                 setAddingService(null);
                 
             })

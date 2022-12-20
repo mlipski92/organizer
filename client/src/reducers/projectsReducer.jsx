@@ -38,13 +38,13 @@ const projectsReducer = (state, action) => {
                 projectsData: state.projectsData.filter( el => el.id !== action.payload.id),
                 error: ''
             }
+            break;
         case 'ADD_SUCCESS':
             return {
                 loading: false,
                 projectsData: [...state.projectsData, action.payload],
                 error: ''
             }
-            // console.log(state.projectsData)
             default:
                 return state
     }

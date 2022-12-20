@@ -12,7 +12,9 @@ export const taskObject = {
     tickingTask: null,
     setTickingTask: () => {},
     holdedTask: null,
-    setHoldedTask: () => {}
+    setHoldedTask: () => {},
+    message: null,
+    setMessage: () => {}
 }
 
 export const TaskContext = createContext(taskObject);

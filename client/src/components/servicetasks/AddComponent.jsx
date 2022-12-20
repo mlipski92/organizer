@@ -90,7 +90,24 @@ export const AddServiceTaskModal = (props) => {
             })
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
-                servicetasksDispatch({ type: 'ADD_SUCCESS', payload: addingServiceTask });
+
+
+                axios.post('http://localhost:8800/servicetasks/getlast')
+                .then(responseLast => {
+                    const { title, id } = responseLast.data[0];
+                        if(addingServiceTask.title === title) {
+                            servicetasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingServiceTask, id:id} });
+                        } else {
+                            console.log('error przy dodawaniu');
+                        }   
+                        setAddingServiceTask(null);     
+                })
+                .catch(error => {
+                    servicetasksDispatch({ type: 'FETCH_ERROR' })
+                })
+
+
+                // servicetasksDispatch({ type: 'ADD_SUCCESS', payload: addingServiceTask });
                 setAddingServiceTask(null);
             })
             .catch(error => {

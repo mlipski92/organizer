@@ -1,10 +1,15 @@
 import axios from "axios";
+import { useContext, useState } from "react";
+import { ProjectContext, projectObject } from "../../contexts/ProjectsContext";
+
 
 
 const ResumeComponent = (props) => {
+    const { projects, projectsDispatch } = useContext(ProjectContext);
+    const { resumingProject, setResumingProject } = useContext(ProjectContext);
 
     const resumeProjectHandler = async () => {
-        await props.setResumingProject({
+        await setResumingProject({
             id: props.id,
             name: props.name,
             status: 1
@@ -12,13 +17,12 @@ const ResumeComponent = (props) => {
 
         await axios.post("http://localhost:8800/projects/resume/" + props.id)
         .then(response => {
-            props.projectsDispatch({ type: 'RESUME_SUCCESS', payload: { id: props.id, name: props.name, status: 1} })
-            console.log(props.id, props.name)
+            projectsDispatch({ type: 'RESUME_SUCCESS', payload: { id: props.id, name: props.name, status: 1} });
         })
         .catch(error => {
             console.log(error);
         })
-        props.setResumingProject(null);
+        setResumingProject(null);
     }
 
     return (

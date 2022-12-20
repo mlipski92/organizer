@@ -20,8 +20,6 @@ const ArchiveProject = (props) => {
         })
         props.setArchivingProject(null);
 
-        // console.log("archiving "+props.)
-
     }
 
 

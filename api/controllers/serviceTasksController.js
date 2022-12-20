@@ -10,6 +10,15 @@ export const getAll = (req, res) => {
     })
 }
 
+export const getLast = (req, res) => {
+    const q = `SELECT * from servicetasks ORDER BY id DESC LIMIT 1`;
+
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
 export const deleteItem = (req, res) => {
     const showRecord = "DELETE FROM servicetasks WHERE id = " + req.params.id;
     db.query(showRecord, (err, data) => {

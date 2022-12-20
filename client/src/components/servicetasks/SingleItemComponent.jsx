@@ -41,7 +41,7 @@ const SingleItem = (props) => {
                                         <div className="mainPart__rows">
                                             <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--task">{props.elData.title} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
+                                                    <strong className="mainPart__item-title--task">{props.elData.title} ({props.elData.id}) {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
                                                 <span className="mainPart__users">{props.elData.name}</span>

@@ -9,6 +9,14 @@ export const getAll = (req, res) => {
     })
 }
 
+export const getLast = (req, res) => {
+    const q = "SELECT * FROM services ORDER BY id DESC LIMIT 1";
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
 export const addItem = (req, res) => {
     const q = "INSERT INTO services (id, name, status) VALUES (null, '" + req.body.name + "', 1)"
     db.query(q, (err, data) => {

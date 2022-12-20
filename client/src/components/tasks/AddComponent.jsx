@@ -76,8 +76,6 @@ export const AddTaskModal = (props) => {
         setAddingTask({
                 ...addingTask, [e.target.name]: e.target.value, user: currentUserId
         });  
-     
-        console.log(e.target.name+" "+e.target.value);  
     }
 
     const priorHandler = e => {
@@ -113,8 +111,22 @@ export const AddTaskModal = (props) => {
             })
             .then( response => {
                 // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
-                console.log(response);
-                tasksDispatch({ type: 'ADD_SUCCESS', payload: addingTask });
+
+
+                axios.post('http://localhost:8800/tasks/getlast')
+                .then(responseLast => {
+                    const { title, id } = responseLast.data[0];
+                        if(addingTask.title === title) {
+                            tasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingTask, id:id} });
+                        } else {
+                            console.log('error przy dodawaniu');
+                        }   
+                        setAddingTask(null);     
+                })
+                .catch(error => {
+                    tasksDispatch({ type: 'FETCH_ERROR' })
+                })
+
                 setAddingTask(null);
             })
             .catch(error => {

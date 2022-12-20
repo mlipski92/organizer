@@ -37,6 +37,7 @@ const TasksPage = () => {
     const [holdedTask, setHoldedTask] = useState(taskObject.holdedTask);
     const [currentProjectName, setCurrentProjectName] = useState(null);
     const {currentUser, setCurrentUser} = useContext(UsersContext);
+    const [message, setMessage] = useState(taskObject.message);
 
 
     useEffect( () => {
@@ -80,7 +81,7 @@ const TasksPage = () => {
                 {currentProjectName}
             </div>
             <div className="mainPart__projects">
-                <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject}}>
+                <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage}}>
                     <div className="mainPart__main-title"><AddTask /></div>
                 </TaskContext.Provider>
                 <div className="mainPart__list">
@@ -90,15 +91,15 @@ const TasksPage = () => {
                 </div>
             </div>
 
-            <TaskContext.Provider value={{deleteTask, setDeleteTask, tasksDispatch, tasks}}>
+            <TaskContext.Provider value={{deleteTask, setDeleteTask, tasksDispatch, tasks, setMessage}}>
                 {deleteTask !== null ? <DeleteModal /> : null}
             </TaskContext.Provider>
 
-            <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject}}>
+            <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage}}>
                 { addingTask !== null ? <AddTaskModal /> : null}
             </TaskContext.Provider>
 
-            <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, tasks}}>
+            <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, tasks, setMessage}}>
                 {holdedTask !== null ? <OnHoldModal /> : null}
             </TaskContext.Provider>
         </>
