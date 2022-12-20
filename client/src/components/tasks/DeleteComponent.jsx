@@ -6,6 +6,7 @@ import { TaskContext } from "../../contexts/TasksContext";
 const DeleteModal = (props) => {
     const { deleteTask, setDeleteTask } = useContext(TaskContext);
     const { tasks, tasksDispatch } = useContext(TaskContext);
+    const { setMessage } = useContext(TaskContext);
 
     const deleteTaskHandler = async e => {
         const { name } = e.target;
@@ -14,7 +15,7 @@ const DeleteModal = (props) => {
             await axios.post("http://localhost:8800/tasks/delete/" + deleteTask) 
             .then(response => {
                 tasksDispatch({ type: 'DELETE_SUCCESS', payload: deleteTask })
-                // setTask({msg: "Zadanie zostało usunięte!", type: "SUCCESS"});
+                setMessage({msg: "Zadanie zostało usunięte!", type: "SUCCESS"});
 
             })
             .catch(error => {

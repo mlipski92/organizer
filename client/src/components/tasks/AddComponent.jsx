@@ -56,6 +56,7 @@ export const AddTaskModal = (props) => {
     const { currentProject, setCurrentProject } = useContext(TaskContext);
     const { currentUser, setCurrentUser } = useContext(UsersContext);
     const [ currentUserId, setCurrentUserId ] = useState(null);
+    const { setMessage } = useContext(TaskContext);
 
     useEffect(() => {
         (async () => {
@@ -72,7 +73,6 @@ export const AddTaskModal = (props) => {
     
 
     const inputChangeHandler = e => {
-        console.log("current id: "+currentUserId);
         setAddingTask({
                 ...addingTask, [e.target.name]: e.target.value, user: currentUserId
         });  
@@ -92,9 +92,6 @@ export const AddTaskModal = (props) => {
 
     const saveTaskHandler = async e => {
         const { name } = e.target;
-        
-        console.log(currentUser);
-        
 
         if (name === "cancelSave") {
             setAddingTask(null);
@@ -110,7 +107,7 @@ export const AddTaskModal = (props) => {
                 whyholded: addingTask.whyholded
             })
             .then( response => {
-                // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+                setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
 
 
                 axios.post('http://localhost:8800/tasks/getlast')

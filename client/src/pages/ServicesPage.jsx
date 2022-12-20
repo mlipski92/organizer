@@ -7,6 +7,7 @@ import servicesReducer from '../reducers/servicesReducer';
 import MapData from '../components/services/MapDataComponent';
 import { AddService, AddServiceModal } from '../components/services/AddComponent';
 import DeleteModal from '../components/services/DeleteComponent';
+import MessageComponent from '../components/services/MessageComponent';
 
 const initialServicesState = {
     loading: true,
@@ -19,6 +20,7 @@ const ServicesPage = () => {
   const [services, servicesDispatch] = useReducer(servicesReducer, initialServicesState);
   const [addingService, setAddingService] = useState(servicesObject.addingService);
   const [deleteService, setDeleteService] = useState(servicesObject.deleteService);
+  const [message, setMessage] = useState(servicesObject.message);
 
 
 
@@ -35,20 +37,24 @@ const ServicesPage = () => {
  
   return (
     <div>
-        <ServicesContext.Provider value={{setAddingService, addingService, servicesDispatch}}>
+        <ServicesContext.Provider value={{setAddingService, addingService, servicesDispatch, setMessage}}>
             <div className="mainPart__main-title"><AddService /></div>
         </ServicesContext.Provider>
 
-        <ServicesContext.Provider value={{servicesDispatch, setAddingService, addingService, deleteService, setDeleteService}}>
+        <ServicesContext.Provider value={{servicesDispatch, setAddingService, addingService, deleteService, setDeleteService, setMessage}}>
             {services.loading ? 'Loading' : <MapData data={services.servicesData} />}
         </ServicesContext.Provider>
 
-        <ServicesContext.Provider value={{setAddingService, addingService, servicesDispatch}}>
+        <ServicesContext.Provider value={{setAddingService, addingService, servicesDispatch, setMessage}}>
             { addingService !== null ? <AddServiceModal /> : null}
         </ServicesContext.Provider>
 
-        <ServicesContext.Provider value={{deleteService, setDeleteService, servicesDispatch}}>
+        <ServicesContext.Provider value={{deleteService, setDeleteService, servicesDispatch, setMessage}}>
             {deleteService !== null ? <DeleteModal /> : null}
+        </ServicesContext.Provider>
+
+        <ServicesContext.Provider value={{message, setMessage}}>
+            <MessageComponent />
         </ServicesContext.Provider>
     </div>
   )

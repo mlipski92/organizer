@@ -42,6 +42,7 @@ export const AddService = () => {
 export const AddServiceModal = (props) => {
     const name = useRef(true);
     const { addingService, setAddingService, servicesDispatch } = useContext(ServicesContext);
+    const { setMessage } = useContext(ServicesContext);
 
     const inputChangeHandler = e => {
         setAddingService({
@@ -56,7 +57,7 @@ export const AddServiceModal = (props) => {
         } else if (name === 'confirmSave') {
             await axios.post('http://localhost:8800/services/add', {name: addingService.name})
             .then( response => {
-                // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+                setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
 
                 axios.post('http://localhost:8800/services/last')
                 .then(responseLast => {

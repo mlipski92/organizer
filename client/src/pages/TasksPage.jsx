@@ -1,17 +1,20 @@
 import axios from 'axios';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { TaskContext, taskObject } from '../contexts/TasksContext';
+import { UsersContext, usersObject } from '../contexts/UsersContext';
+
 import tasksReducer from '../reducers/tasksReducer';
+import projectsReducer from '../reducers/projectsReducer';
+
 
 import { AddTask, AddTaskModal } from '../components/tasks/AddComponent';
 import DeleteModal from '../components/tasks/DeleteComponent';
 import OnHoldModal from '../components/tasks/HoldComponent';
 import MapData from '../components/tasks/MapDataComponent';
-import projectsReducer from '../reducers/projectsReducer';
-import { UsersContext, usersObject } from '../contexts/UsersContext';
-import { useAuth0 } from '@auth0/auth0-react';
+import MessageComponent from '../components/tasks/MessageComponent';
 
 
 const initialTasksState = {
@@ -48,8 +51,6 @@ const TasksPage = () => {
         }).catch(error => {
             console.log(error)
         })
-
-        console.log("current user: "+currentUser);
         
     }, []);
 
@@ -85,7 +86,7 @@ const TasksPage = () => {
                     <div className="mainPart__main-title"><AddTask /></div>
                 </TaskContext.Provider>
                 <div className="mainPart__list">
-                    <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask}}>
+                    <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask, setMessage}}>
                         { tasks.loading ? 'Loading' : <MapData data={tasks.tasksData} />}
                     </TaskContext.Provider>  
                 </div>
@@ -101,6 +102,10 @@ const TasksPage = () => {
 
             <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, tasks, setMessage}}>
                 {holdedTask !== null ? <OnHoldModal /> : null}
+            </TaskContext.Provider>
+
+            <TaskContext.Provider value={{message, setMessage}}>
+                <MessageComponent />
             </TaskContext.Provider>
         </>
     )

@@ -7,6 +7,7 @@ import { ServicesContext } from "../../contexts/ServicesContext";
 
 const DeleteModal = (props) => {
     const { deleteService, setDeleteService, servicesDispatch } = useContext(ServicesContext);
+    const { setMessage } = useContext(ServicesContext);
 
     const deleteServiceHandler = async e => {
         const { name } = e.target;
@@ -16,7 +17,7 @@ const DeleteModal = (props) => {
             await axios.post("http://localhost:8800/services/delete/" + deleteService)
             .then(response => {
                 servicesDispatch({ type: 'DELETE_SUCCESS', payload: deleteService })
-                // setMessage({msg: "Projekt został usunięty!", type: "SUCCESS"});
+                setMessage({msg: "Projekt został usunięty!", type: "SUCCESS"});
             })
             .catch(error => {
                 console.log(0);

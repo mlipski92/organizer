@@ -53,6 +53,7 @@ export const AddServiceTaskModal = (props) => {
     const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
     const { currentUser, setCurrentUser } = useContext(UsersContext);
     const [ currentUserId, setCurrentUserId ] = useState(null);
+    const { setMessage } = useContext(ServiceTaskContext);
 
     const inputChangeHandler = e => {
         setAddingServiceTask({
@@ -89,7 +90,7 @@ export const AddServiceTaskModal = (props) => {
                 user: addingServiceTask.user
             })
             .then( response => {
-                // setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+                setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
 
 
                 axios.post('http://localhost:8800/servicetasks/getlast')
@@ -106,8 +107,6 @@ export const AddServiceTaskModal = (props) => {
                     servicetasksDispatch({ type: 'FETCH_ERROR' })
                 })
 
-
-                // servicetasksDispatch({ type: 'ADD_SUCCESS', payload: addingServiceTask });
                 setAddingServiceTask(null);
             })
             .catch(error => {

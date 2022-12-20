@@ -6,7 +6,9 @@ export const servicesObject = {
     addingService: null,
     setAddingService: () => {},
     deleteService: null,
-    setDeleteService: () => {}
+    setDeleteService: () => {},
+    message: null,
+    setMessage: () => {}
 }
 
 export const ServicesContext = createContext(servicesObject)

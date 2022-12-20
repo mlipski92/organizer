@@ -6,6 +6,7 @@ import { TaskContext } from "../../contexts/TasksContext";
 const TickTask = (props) => {
     const { tasks, tasksDispatch } = useContext(TaskContext);
     const { tickingTask, setTickingTask } = useContext(TaskContext);
+    const { setMessage } = useContext(TaskContext);
 
     const tickTaskHandler = async e => {
         await setTickingTask(props.id);
@@ -13,6 +14,7 @@ const TickTask = (props) => {
         await axios.post("http://localhost:8800/tasks/tick/" + props.id)
         .then(response => {
             const newData = {...props.itemData, status: 2};
+            setMessage({msg: "Zadanie zostało zrobione!", type: "SUCCESS"});
             tasksDispatch({ type: 'TICK_SUCCESS', payload: {itemData: newData} })
         })
         .catch(error => {

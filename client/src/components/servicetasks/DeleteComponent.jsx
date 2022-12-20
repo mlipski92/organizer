@@ -8,6 +8,7 @@ import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
 const DeleteModal = (props) => {
     const { deleteServiceTask, setDeleteServiceTask } = useContext(ServiceTaskContext);
     const { servicetasks, servicetasksDispatch } = useContext(ServiceTaskContext);
+    const { setMessage } = useContext(ServiceTaskContext);
 
     
     const deleteServiceTaskHandler = async e => {
@@ -17,7 +18,7 @@ const DeleteModal = (props) => {
             await axios.post("http://localhost:8800/servicetasks/delete/" + deleteServiceTask) 
             .then(response => {
                 servicetasksDispatch({ type: 'DELETE_SUCCESS', payload: deleteServiceTask })
-                // setTask({msg: "Zadanie zostało usunięte!", type: "SUCCESS"});
+                setMessage({msg: "Zadanie zostało usunięte!", type: "SUCCESS"});
 
             })
             .catch(error => {

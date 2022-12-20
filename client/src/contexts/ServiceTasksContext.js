@@ -8,7 +8,9 @@ export const serviceTaskObject = {
     addingServiceTask: null, 
     setAddingServiceTask: () => {},
     deleteServiceTask: null,
-    setDeleteServiceTask: (id) => {}
+    setDeleteServiceTask: (id) => {},
+    message: null,
+    setMessage: () => {}
 }
 
 export const ServiceTaskContext = createContext(serviceTaskObject);

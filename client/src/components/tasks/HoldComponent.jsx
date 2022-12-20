@@ -6,6 +6,7 @@ import { TaskContext } from "../../contexts/TasksContext";
 const OnHoldModal = (props) => {
     const whyHolded = useRef(true);
     const {holdedTask, setHoldedTask, tasksDispatch} = useContext(TaskContext);
+    const { setMessage } = useContext(TaskContext);
 
     const inputChangeHandler = e => {
         setHoldedTask({
@@ -19,6 +20,7 @@ const OnHoldModal = (props) => {
             await axios.post("http://localhost:8800/tasks/hold/"+holdedTask.id, { whyHolded: holdedTask.whyholded })
             .then(response => {
                 tasksDispatch({ type: 'HOLD_SUCCESS', payload: holdedTask });
+                setMessage({msg: "Zadanie zostało wstrzymane!", type: "SUCCESS"});
                 setHoldedTask(null);
             })
             .catch(error => {
