@@ -52,10 +52,28 @@ export const AddProjectModal = (props) => {
     const { addingProject, setAddingProject, projectsDispatch } = useContext(ProjectContext);
     const { setMessage } = useContext(ProjectContext);
 
+    // const inputChangeHandler = e => {
+    //     setAddingProject({
+    //             ...addingProject, [name.current.name]: e.target.value
+    //     });    
+    // }
+
     const inputChangeHandler = e => {
-        setAddingProject({
+        const { inputType } = e.nativeEvent;
+        if(inputType === 'deleteContentBackward') {
+            setAddingProject({
                 ...addingProject, [name.current.name]: e.target.value
-        });    
+        }); 
+        } else if(inputType === 'insertText') {
+            const singleChar = e.nativeEvent.data.toUpperCase();
+            const allowedChars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890 ÓŁŚĆŹŻ";
+    
+            if (allowedChars.includes(singleChar) && addingProject.name.length < 100) {
+                setAddingProject({
+                    ...addingProject, [name.current.name]: e.target.value
+            });
+            }
+        }
     }
 
     const saveProjectHandler = async e => {
@@ -64,29 +82,35 @@ export const AddProjectModal = (props) => {
         if (name === "cancelSave") {
             setAddingProject(null);
         } else if (name === 'confirmSave') {
-            await axios.post('http://localhost:8800/projects/add', {name: addingProject.name})
-            .then( response => {
-                setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
 
-                axios.post('http://localhost:8800/projects/last')
-                .then(responseLast => {
-                    const { name, id } = responseLast.data[0];
-                        if(addingProject.name === name) {
-                            projectsDispatch({ type: 'ADD_SUCCESS', payload: {...addingProject, id:id} });
-                        } else {
-                            console.log('error przy dodawaniu');
-                        }   
-                        setAddingProject(null);     
+            if (addingProject.name !== null && addingProject.name !== '') {
+                await axios.post('http://localhost:8800/projects/add', {name: addingProject.name})
+                .then( response => {
+                    setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+
+                    axios.post('http://localhost:8800/projects/last')
+                    .then(responseLast => {
+                        const { name, id } = responseLast.data[0];
+                            if(addingProject.name === name) {
+                                projectsDispatch({ type: 'ADD_SUCCESS', payload: {...addingProject, id:id} });
+                            } else {
+                                console.log('error przy dodawaniu');
+                            }   
+                            setAddingProject(null);     
+                    })
+                    .catch(error => {
+                        projectsDispatch({ type: 'FETCH_ERROR' })
+                    })
+                    setAddingProject(null);
                 })
                 .catch(error => {
-                    projectsDispatch({ type: 'FETCH_ERROR' })
+                    // setMessage('test')
+                    console.log(error);
                 })
-                setAddingProject(null);
-            })
-            .catch(error => {
-                // setMessage('test')
-                console.log(error);
-            })
+            } else {
+                setMessage({msg: "Nie wypełniłeś poprawnie wszystkich pól!", type: "FAIL"});
+            }
+
         }
     }
 

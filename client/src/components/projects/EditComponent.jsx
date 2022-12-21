@@ -7,24 +7,48 @@ const EditModal = (props) => {
     const name = useRef(true);
     const {editingProject, setEditingProject, projectsDispatch, setMessage} = useContext(ProjectContext);
 
+    // const inputChangeHandler = e => {
+    //     setEditingProject({
+    //             ...editingProject, [name.current.name]: e.target.value
+    //     });     
+    // }
+
     const inputChangeHandler = e => {
-        setEditingProject({
+        const { inputType } = e.nativeEvent;
+        if(inputType === 'deleteContentBackward') {
+            setEditingProject({
                 ...editingProject, [name.current.name]: e.target.value
-        });     
+        }); 
+        } else if(inputType === 'insertText') {
+            const singleChar = e.nativeEvent.data.toUpperCase();
+            const allowedChars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890 ÓŁŚĆŹŻ";
+    
+            if (allowedChars.includes(singleChar) && editingProject.name.length < 100) {
+                setEditingProject({
+                    ...editingProject, [name.current.name]: e.target.value
+            });
+            }
+        }
     }
 
     const saveChangesHandler = async e => {
         if (e.target.name === "confirmSave") {
-       
-            await axios.post("http://localhost:8800/projects/edit/"+editingProject.id, { name: editingProject.name })
-            .then(response => {
-                projectsDispatch({ type: 'EDIT_SUCCESS', payload: editingProject });
-                setMessage({msg: "Projekt został edytowany!", type: "SUCCESS"});
-                setEditingProject(null);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+
+            if (editingProject.name !== null && editingProject.name !== '') {
+                await axios.post("http://localhost:8800/projects/edit/"+editingProject.id, { name: editingProject.name })
+                .then(response => {
+                    projectsDispatch({ type: 'EDIT_SUCCESS', payload: editingProject });
+                    setMessage({msg: "Projekt został edytowany!", type: "SUCCESS"});
+                    setEditingProject(null);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            } else {
+                setMessage({msg: "Nie wypełniłeś poprawnie wszystkich pól!", type: "FAIL"});
+            }
+
+
             
         } else if (e.target.name === "cancelSave") {
             setEditingProject(null);

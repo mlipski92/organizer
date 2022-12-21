@@ -78,7 +78,6 @@ export const AddTaskModal = (props) => {
     
 
     const inputChangeHandler = e => {
-        console.log(e.nativeEvent.inputType);
         const { inputType } = e.nativeEvent;
         if(inputType === 'deleteContentBackward') {
             setAddingTask({
@@ -94,7 +93,6 @@ export const AddTaskModal = (props) => {
                 });  
             }
         }
-        
     }
 
     const priorHandler = e => {
@@ -116,38 +114,43 @@ export const AddTaskModal = (props) => {
             setAddingTask(null);
         } else if (name === 'confirmSave') {
         
-            await axios.post('http://localhost:8800/tasks/add', {
-                id: null,
-                title: addingTask.title,
-                user: addingTask.user,
-                prior: addingTask.prior,
-                project: addingTask.project,
-                status: addingTask.status,
-                whyholded: addingTask.whyholded
-            })
-            .then( response => {
-                setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
+            if (addingTask.title !== null && addingTask.title !== '') {
+                await axios.post('http://localhost:8800/tasks/add', {
+                    id: null,
+                    title: addingTask.title,
+                    user: addingTask.user,
+                    prior: addingTask.prior,
+                    project: addingTask.project,
+                    status: addingTask.status,
+                    whyholded: addingTask.whyholded
+                })
+                .then( response => {
+                    setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
 
 
-                axios.post('http://localhost:8800/tasks/getlast')
-                .then(responseLast => {
-                    const { title, id } = responseLast.data[0];
-                        if(addingTask.title === title) {
-                            tasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingTask, id:id} });
-                        } else {
-                            console.log('error przy dodawaniu');
-                        }   
-                        setAddingTask(null);     
+                    axios.post('http://localhost:8800/tasks/getlast')
+                    .then(responseLast => {
+                        const { title, id } = responseLast.data[0];
+                            if(addingTask.title === title) {
+                                tasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingTask, id:id} });
+                            } else {
+                                console.log('error przy dodawaniu');
+                            }   
+                            setAddingTask(null);     
+                    })
+                    .catch(error => {
+                        tasksDispatch({ type: 'FETCH_ERROR' })
+                    })
+
+                    setAddingTask(null);
                 })
                 .catch(error => {
-                    tasksDispatch({ type: 'FETCH_ERROR' })
+                    console.log(error);
                 })
+            } else {
+                setMessage({msg: "Nie wypełniłeś poprawnie wszystkich pól!", type: "FAIL"});
+            }
 
-                setAddingTask(null);
-            })
-            .catch(error => {
-                console.log(error);
-            })
         }
     }
 

@@ -63,10 +63,49 @@ export const AddServiceTaskModal = (props) => {
     const [ currentUserId, setCurrentUserId ] = useState(null);
     const { setMessage } = useContext(ServiceTaskContext);
 
+    // const inputChangeHandler = e => {
+    //     setAddingServiceTask({
+    //             ...addingServiceTask, [e.target.name]: e.target.value, user: currentUserId
+    //     });  
+    // }
+
     const inputChangeHandler = e => {
-        setAddingServiceTask({
-                ...addingServiceTask, [e.target.name]: e.target.value, user: currentUserId
-        });  
+        console.log(e.target.name);
+        const { name } = e.target;
+        if(name === 'title') {
+            const { inputType } = e.nativeEvent;
+            if(inputType === 'deleteContentBackward') {
+                setAddingServiceTask({
+                        ...addingServiceTask, [e.target.name]: e.target.value, user: currentUserId
+                });  
+            } else if(inputType === 'insertText') {
+                const singleChar = e.nativeEvent.data.toUpperCase();
+                const allowedChars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890 ÓŁŚĆŹŻ";
+        
+                if (allowedChars.includes(singleChar) && addingServiceTask.title.length < 100) {
+                    setAddingServiceTask({
+                            ...addingServiceTask, title: e.target.value, user: currentUserId
+                    });  
+                }
+            }
+        } else if(name === 'time') {
+            const { inputType } = e.nativeEvent;
+            if(inputType === 'deleteContentBackward') {
+                setAddingServiceTask({
+                        ...addingServiceTask, time: e.target.value, user: currentUserId
+                });  
+            } else if(inputType === 'insertText') {
+                const singleChar = e.nativeEvent.data;
+                const allowedChars = "1234567890";
+                console.log(addingServiceTask.time);
+        
+                if (allowedChars.includes(singleChar) && e.target.value < 300) {
+                    setAddingServiceTask({
+                            ...addingServiceTask, time: e.target.value, user: currentUserId
+                    });  
+                }
+            }
+        }
     }
 
     useEffect(() => {
@@ -88,38 +127,43 @@ export const AddServiceTaskModal = (props) => {
         if (name === "cancelSave") {
             setAddingServiceTask(null);
         } else if (name === 'confirmSave') {
+
+            if(addingServiceTask.title !== '' && addingServiceTask.title !== null && addingServiceTask.time > 5) {
         
-            await axios.post('http://localhost:8800/servicetasks/add', {
-                id: null,
-                title: addingServiceTask.title,
-                time: addingServiceTask.time,
-                status: 1,
-                project: addingServiceTask.project,
-                user: addingServiceTask.user
-            })
-            .then( response => {
-                setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
+                await axios.post('http://localhost:8800/servicetasks/add', {
+                    id: null,
+                    title: addingServiceTask.title,
+                    time: addingServiceTask.time,
+                    status: 1,
+                    project: addingServiceTask.project,
+                    user: addingServiceTask.user
+                })
+                .then( response => {
+                    setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
 
+                    axios.post('http://localhost:8800/servicetasks/getlast')
+                    .then(responseLast => {
+                        const { title, id } = responseLast.data[0];
+                            if(addingServiceTask.title === title) {
+                                servicetasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingServiceTask, id:id} });
+                            } else {
+                                console.log('error przy dodawaniu');
+                            }   
+                            setAddingServiceTask(null);     
+                    })
+                    .catch(error => {
+                        servicetasksDispatch({ type: 'FETCH_ERROR' })
+                    })
 
-                axios.post('http://localhost:8800/servicetasks/getlast')
-                .then(responseLast => {
-                    const { title, id } = responseLast.data[0];
-                        if(addingServiceTask.title === title) {
-                            servicetasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingServiceTask, id:id} });
-                        } else {
-                            console.log('error przy dodawaniu');
-                        }   
-                        setAddingServiceTask(null);     
+                    setAddingServiceTask(null);
                 })
                 .catch(error => {
-                    servicetasksDispatch({ type: 'FETCH_ERROR' })
+                    console.log(error);
                 })
 
-                setAddingServiceTask(null);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            } else {
+                setMessage({msg: "Nie wypełniłeś poprawnie wszystkich pól!", type: "FAIL"});
+            }
         }
     }
 
@@ -152,9 +196,11 @@ export const AddServiceTaskModal = (props) => {
                                                     name="time" 
                                                     onChange={inputChangeHandler} 
                                                     value={addingServiceTask.time} 
-                                                    type="text" 
+                                                    type="number" 
                                                     className="addModal__input" 
                                                     placeholder="Czas (w minutach)"
+                                                    max="300"
+                                                    min="5"
                                                 />
                                                 </div>
                                             <div className="addModal__form-item">

@@ -51,10 +51,28 @@ export const AddServiceModal = (props) => {
     const { addingService, setAddingService, servicesDispatch } = useContext(ServicesContext);
     const { setMessage } = useContext(ServicesContext);
 
+    // const inputChangeHandler = e => {
+    //     setAddingService({
+    //             ...addingService, [name.current.name]: e.target.value
+    //     });    
+    // }
+
     const inputChangeHandler = e => {
-        setAddingService({
+        const { inputType } = e.nativeEvent;
+        if(inputType === 'deleteContentBackward') {
+            setAddingService({
                 ...addingService, [name.current.name]: e.target.value
-        });    
+            });   
+        } else if(inputType === 'insertText') {
+            const singleChar = e.nativeEvent.data.toUpperCase();
+            const allowedChars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890 ÓŁŚĆŹŻ";
+    
+            if (allowedChars.includes(singleChar) && addingService.name.length < 100) {
+                setAddingService({
+                    ...addingService, [name.current.name]: e.target.value
+                });  
+            }
+        }
     }
 
     const saveServiceHandler = async e => {
@@ -62,32 +80,38 @@ export const AddServiceModal = (props) => {
         if (name === "cancelSave") {
             setAddingService(null);
         } else if (name === 'confirmSave') {
-            await axios.post('http://localhost:8800/services/add', {name: addingService.name})
-            .then( response => {
-                setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
 
-                axios.post('http://localhost:8800/services/last')
-                .then(responseLast => {
-                    const { name, id } = responseLast.data[0];
-                        if(addingService.name === name) {
-                            servicesDispatch({ type: 'ADD_SUCCESS', payload: {...addingService, id:id} });
-                        } else {
-                            console.log('error przy dodawaniu');
-                        }   
-                        setAddingService(null);     
+            if (addingService.name !== null && addingService.name !== '') {
+                await axios.post('http://localhost:8800/services/add', {name: addingService.name})
+                .then( response => {
+                    setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
+
+                    axios.post('http://localhost:8800/services/last')
+                    .then(responseLast => {
+                        const { name, id } = responseLast.data[0];
+                            if(addingService.name === name) {
+                                servicesDispatch({ type: 'ADD_SUCCESS', payload: {...addingService, id:id} });
+                            } else {
+                                console.log('error przy dodawaniu');
+                            }   
+                            setAddingService(null);     
+                    })
+                    .catch(error => {
+                        servicesDispatch({ type: 'FETCH_ERROR' })
+                    })
+
+
+                    // servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
+                    setAddingService(null);
+                    
                 })
                 .catch(error => {
-                    servicesDispatch({ type: 'FETCH_ERROR' })
+                    console.log(error);
                 })
+            } else {
+                setMessage({msg: "Nie wypełniłeś poprawnie wszystkich pól!", type: "FAIL"});
+            }
 
-
-                // servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
-                setAddingService(null);
-                
-            })
-            .catch(error => {
-                console.log(error);
-            })
         }
     }
 
