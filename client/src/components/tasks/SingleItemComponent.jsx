@@ -89,20 +89,6 @@ const SingleItem = (props) => {
         saveChangesHandler(props.id);
     }
 
-    // const checkUserInfo = (id) => {
-    //     (async() => {
-    //         await axios.post("http://localhost:8800/users/getcurrentid/"+id)
-    //         .then(response => {
-    //             console.log(response.data[0].name)
-    //             return response.data[0].name;
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    //     })()
-        
-    // }
-
     const saveChangesHandler = async (id) => {
 
             await axios.post("http://localhost:8800/tasks/hold/"+id, { whyHolded: '' })

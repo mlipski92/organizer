@@ -5,8 +5,6 @@ import { useEffect, useRef, useContext } from "react";
 import { TaskContext } from "../../contexts/TasksContext";
 import { UsersContext, usersObject } from "../../contexts/UsersContext";
 
-
-
 export const AddTask = () => {
     const { addingTask, setAddingTask } = useContext(TaskContext);
     const { currentProject, setCurrentProject } = useContext(TaskContext);
@@ -51,7 +49,6 @@ export const AddTask = () => {
                     )
                 }
             </TaskContext.Consumer>
-            
         </>
     )
 }
@@ -81,9 +78,23 @@ export const AddTaskModal = (props) => {
     
 
     const inputChangeHandler = e => {
-        setAddingTask({
+        console.log(e.nativeEvent.inputType);
+        const { inputType } = e.nativeEvent;
+        if(inputType === 'deleteContentBackward') {
+            setAddingTask({
                 ...addingTask, [e.target.name]: e.target.value, user: currentUserId
-        });  
+            });  
+        } else if(inputType === 'insertText') {
+            const singleChar = e.nativeEvent.data.toUpperCase();
+            const allowedChars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890 ÓŁŚĆŹŻ";
+    
+            if (allowedChars.includes(singleChar) && addingTask.title.length < 100) {
+                setAddingTask({
+                        ...addingTask, [e.target.name]: e.target.value, user: currentUserId
+                });  
+            }
+        }
+        
     }
 
     const priorHandler = e => {
