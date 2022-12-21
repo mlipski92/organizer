@@ -23,8 +23,7 @@ const SingleItem = (props) => {
                                     <div className="mainPart__rows">
                                         <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--project">{props.elData.name} ({props.elData.id})</strong>
-                                                    Jakub Lipiński | Mateusz Lipski
+                                                    <strong className="mainPart__item-title--project">{props.elData.name}</strong>
                                                 </span>
                                                 <div className="buttons-list">
                                                     <div className="buttons-list__item" onClick={() => {askDeleteServiceHandler(props.id)}}>

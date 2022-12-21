@@ -74,6 +74,7 @@ const WhyHoldedInfo = (props) => (
 const SingleItem = (props) => {
     const {deleteTask, setDeleteTask} = useContext(TaskContext);
     const {holdedTask, setHoldedTask} = useContext(TaskContext);
+    const {currentProjectStatus} = useContext(TaskContext);
     const {tasksDispatch} = useContext(TaskContext);
 
     const askDeleteTaskHandler = (id) => {
@@ -126,17 +127,20 @@ const SingleItem = (props) => {
                                         <div className="mainPart__rows">
                                             <div className="mainPart__row">
                                                 <span className="mainPart__item-basic-info">
-                                                    <strong className="mainPart__item-title--task">{props.elData.title} {props.id} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
+                                                    <strong className="mainPart__item-title--task">{props.elData.title} {props.elData.prior === 1 ? <span className="mainPart__item-title--important">(PILNE)</span> : null}</strong>
                                                 </span>
                                                 <br />
                                                 <span className="mainPart__users">{props.elData.name}</span>
                                                 
-                                                <div className="buttons-list">
-                                                    { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.elData}  data={props.data} tasksDispatch={tasksDispatch} /> : null} 
-                                                    { props.elData.whyholded !== '' ? <ResumeTask askHoldedTaskHandler={askHoldedTaskHandler} resumeTaskHandler={resumeTaskHandler} id={props.id} /> : null}
-                                                    { props.elData.whyholded !== '' || props.elData.status === 2 ? null : <HoldButton askHoldedTaskHandler={askHoldedTaskHandler} data={props.data} id={props.id} />}
-                                                    <DeleteButton askDeleteTaskHandler={askDeleteTaskHandler} id={props.id} />
-                                                </div>
+                                                { currentProjectStatus === 1 &&
+                                                    <div className="buttons-list">
+                                                        { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.elData}  data={props.data} tasksDispatch={tasksDispatch} /> : null} 
+                                                        { props.elData.whyholded !== '' ? <ResumeTask askHoldedTaskHandler={askHoldedTaskHandler} resumeTaskHandler={resumeTaskHandler} id={props.id} /> : null}
+                                                        { props.elData.whyholded !== '' || props.elData.status === 2 ? null : <HoldButton askHoldedTaskHandler={askHoldedTaskHandler} data={props.data} id={props.id} />}
+                                                        <DeleteButton askDeleteTaskHandler={askDeleteTaskHandler} id={props.id} />
+                                                    </div>
+                                                }
+                                                
 
                                                 {props.elData.whyholded !== '' ? <WhyHoldedInfo whyholded={props.elData.whyholded} /> : null} 
                                                 

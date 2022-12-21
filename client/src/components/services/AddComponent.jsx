@@ -112,7 +112,8 @@ export const AddServiceModal = (props) => {
                                                     onChange={inputChangeHandler} 
                                                     value={addingService.name} 
                                                     type="text" 
-                                                    className="addModal__input" 
+                                                    className="addModal__input"
+                                                    placeholder="Nazwa projektu" 
                                                 />
                                                 </div>
                                             <div className="addModal__form-item">

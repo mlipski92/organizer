@@ -39,6 +39,7 @@ const TasksPage = () => {
     const [currentProject, setCurrentProject] = useState(taskObject.currentProject);
     const [holdedTask, setHoldedTask] = useState(taskObject.holdedTask);
     const [currentProjectName, setCurrentProjectName] = useState(null);
+    const [currentProjectStatus, setCurrentProjectStatus] = useState(null);
     const {currentUser, setCurrentUser} = useContext(UsersContext);
     const [message, setMessage] = useState(taskObject.message);
 
@@ -69,6 +70,7 @@ const TasksPage = () => {
         data.forEach(el => {
             if (el.id === parseInt(id)) {
                 setCurrentProjectName(el.name);
+                setCurrentProjectStatus(el.status);
             }
         });
     }
@@ -79,11 +81,14 @@ const TasksPage = () => {
     return (
         <>
             <div className="mainPart__projects">
-                <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage, currentProjectName}}>
-                    <div className="mainPart__main-title"><AddTask /></div>
-                </TaskContext.Provider>
+                { currentProjectStatus === 1 &&
+                    <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage, currentProjectName}}>
+                        <div className="mainPart__main-title"><AddTask /></div>
+                    </TaskContext.Provider>
+                }
+
                 <div className="mainPart__list">
-                    <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask, setMessage}}>
+                    <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask, setMessage, currentProjectStatus}}>
                         { tasks.loading ? 'Loading' : <MapData data={tasks.tasksData} />}
                     </TaskContext.Provider>  
                 </div>

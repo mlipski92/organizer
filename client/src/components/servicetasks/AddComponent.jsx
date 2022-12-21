@@ -17,7 +17,7 @@ export const AddServiceTask = () => {
             {
                 id: null,
                 title: '',
-                time: 0,
+                time: null,
                 status: 0,
                 project: currentProject
 
@@ -145,6 +145,7 @@ export const AddServiceTaskModal = (props) => {
                                                     value={addingServiceTask.title} 
                                                     type="text" 
                                                     className="addModal__input" 
+                                                    placeholder="Zadanie"
                                                 />
                                                 <input 
                                                     ref={time}
@@ -153,6 +154,7 @@ export const AddServiceTaskModal = (props) => {
                                                     value={addingServiceTask.time} 
                                                     type="text" 
                                                     className="addModal__input" 
+                                                    placeholder="Czas (w minutach)"
                                                 />
                                                 </div>
                                             <div className="addModal__form-item">

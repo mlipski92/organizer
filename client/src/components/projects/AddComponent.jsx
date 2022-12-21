@@ -112,6 +112,7 @@ export const AddProjectModal = (props) => {
                                                     value={addingProject.name} 
                                                     type="text" 
                                                     className="addModal__input" 
+                                                    placeholder="Nazwa projektu"
                                                 />
                                                 </div>
                                             <div className="addModal__form-item">

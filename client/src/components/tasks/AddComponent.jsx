@@ -162,8 +162,9 @@ export const AddTaskModal = (props) => {
                                                     value={addingTask.title} 
                                                     type="text" 
                                                     className="addModal__input" 
+                                                    placeholder="Zadanie"
                                                 />
-                                                <label>
+                                                <label className="addModal__highPrior">
                                                     <input type="checkbox" ref={prior} onClick={priorHandler} />
                                                     <span>Wysoki priorytet</span>
                                                 </label>

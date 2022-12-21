@@ -8,7 +8,7 @@ const SumTimeComponent = (props) => {
 
     const { allTasks } = props;
     allTasks.forEach(el => {
-        allTasksTime = allTasksTime + el.time;
+        allTasksTime = allTasksTime + parseInt(el.time);
     });
 
 
