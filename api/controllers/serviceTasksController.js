@@ -10,6 +10,15 @@ export const getAll = (req, res) => {
     })
 }
 
+export const sumTimes = (req, res) => {
+    const q = `SELECT SUM(time) from servicetasks WHERE status = 1 `;
+
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
 export const getLast = (req, res) => {
     const q = `SELECT * from servicetasks ORDER BY id DESC LIMIT 1`;
 

@@ -14,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 
 import { UsersContext, usersObject } from './contexts/UsersContext';
+import MainPage from './pages/MainPage';
 
 const UserBasicPanel = (props) => {
   return (
@@ -126,7 +127,7 @@ const MainLayout = () => {
 
                         <div className="mainApp__part-inside">
                             <div className="mainApp__part-header">
-                                <h2 className="mainApp__part-h2">Projekty</h2>
+                                <h2 className="mainApp__part-h2"></h2>
                             </div>
                             <div className="mainApp__part-body">
                               <UsersContext.Provider value={{currentUser, setCurrentUser}}>
@@ -179,6 +180,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <MainLayout />,
     children: [
+      {
+        path: '/',
+        element: <MainPage />
+      },
       {
         path: '/projects',
         element: <ProjectsPage />

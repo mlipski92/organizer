@@ -28,7 +28,6 @@ const ServicesPage = () => {
     axios.post('http://localhost:8800/services/all')
       .then(response => {
           servicesDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
-        console.log("response: "+JSON.stringify(response.data))
       })
       .catch(error => {
           servicesDispatch({ type: 'FETCH_ERROR' })
