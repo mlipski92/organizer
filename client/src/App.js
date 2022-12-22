@@ -1,19 +1,20 @@
-// import './App.css';
-// import './index.css';
-import './scss/index.scss';
-import ProjectsPage from './pages/ProjectsPage';
-import ArchivedProjectsPage from './pages/ArchivedProjectsPage';
-import TasksPage from './pages/TasksPage';
-import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom';
-import MainNavi from './components/layout/MainNavi';
-import ServicesPage from './pages/ServicesPage';
-import ServiceTasksPage from './pages/ServiceTasksPage';
-import LoginPage from './pages/LoginPage';
 import { useContext, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
+import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom';
 
 import { UsersContext, usersObject } from './contexts/UsersContext';
+
+import './scss/index.scss';
+
+import MainNavi from './components/layout/MainNavi';
+
+import ProjectsPage from './pages/ProjectsPage';
+import ArchivedProjectsPage from './pages/ArchivedProjectsPage';
+import TasksPage from './pages/TasksPage';
+import ServicesPage from './pages/ServicesPage';
+import ServiceTasksPage from './pages/ServiceTasksPage';
+import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 
 const UserBasicPanel = (props) => {
@@ -167,7 +168,7 @@ const MainLayout = () => {
                     </div>
                 </div>
                 <div className="mainApp__footer">
-                    <p>Created by Me!</p>
+                    <p>Stworzone przez Mateusza Lipskiego</p>
                 </div>
             </div>
     </>

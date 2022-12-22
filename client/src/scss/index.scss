@@ -64,6 +64,19 @@
 
   }
 
+  .emptyTable {
+    color: #fff;
+    font-size: 18px;
+    background: #323232;
+    display: block;
+    padding: 20px 20px;
+    border-radius: 5px;
+    border: 1px solid #676767;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-family: 'Quicksand', sans-serif;
+  }
+
 .main-page {
     &__inprogress-tasks {
         width: 100%;

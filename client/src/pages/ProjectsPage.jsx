@@ -24,7 +24,6 @@ const ProjectsPage = () => {
     const [archivingProject, setArchivingProject] = useState(projectObject.archivingProject);
     const [message, setMessage] = useState(projectObject.message);
  
-
     useEffect(() => {
         axios.post('http://localhost:8800/projects/all')
         .then(response => {

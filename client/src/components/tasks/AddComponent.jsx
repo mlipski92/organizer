@@ -113,6 +113,7 @@ export const AddTaskModal = (props) => {
         if (name === "cancelSave") {
             setAddingTask(null);
         } else if (name === 'confirmSave') {
+            
         
             if (addingTask.title !== null && addingTask.title !== '') {
                 await axios.post('http://localhost:8800/tasks/add', {
@@ -125,12 +126,13 @@ export const AddTaskModal = (props) => {
                     whyholded: addingTask.whyholded
                 })
                 .then( response => {
+                    console.log(response)
                     setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
-
 
                     axios.post('http://localhost:8800/tasks/getlast')
                     .then(responseLast => {
                         const { title, id } = responseLast.data[0];
+                        console.log("fff "+title+" "+addingTask.title)
                             if(addingTask.title === title) {
                                 tasksDispatch({ type: 'ADD_SUCCESS', payload: {...addingTask, id:id} });
                             } else {

@@ -42,13 +42,18 @@ const TasksPage = () => {
     const [currentProjectStatus, setCurrentProjectStatus] = useState(null);
     const {currentUser, setCurrentUser} = useContext(UsersContext);
     const [message, setMessage] = useState(taskObject.message);
+    const [empty, setEmpty] = useState(false);
 
 
     useEffect( () => {
         axios.post(`http://localhost:8800/tasks/get/${id}`)
         .then(response => {
-            tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
-            setCurrentProject(id);
+            // if (JSON.stringify(response.data) === "[]") {
+            //     setEmpty(true);
+            // } else {
+                tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+                setCurrentProject(id);
+            // }
         }).catch(error => {
             console.log(error)
         })
@@ -87,11 +92,14 @@ const TasksPage = () => {
                     </TaskContext.Provider>
                 }
 
+               
                 <div className="mainPart__list">
                     <TaskContext.Provider value={{holdedTask, setHoldedTask, tasksDispatch, setDeleteTask, tickingTask, setTickingTask, setMessage, currentProjectStatus}}>
+                        { JSON.stringify(tasks.tasksData) === "[]" ? <span className="emptyTable">Brak zadań na ten moment...</span> : null}
                         { tasks.loading ? 'Loading' : <MapData data={tasks.tasksData} />}
                     </TaskContext.Provider>  
                 </div>
+
             </div>
 
             <TaskContext.Provider value={{deleteTask, setDeleteTask, tasksDispatch, tasks, setMessage}}>
