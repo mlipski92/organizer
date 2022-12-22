@@ -9,6 +9,41 @@ export const getAll = (req, res) => {
     })
 }
 
+export const getHolded = (req, res) => {
+    const q = `
+    SELECT 
+    p.id AS projectid,
+    u.name AS username, 
+    p.name AS projectname, 
+    t.title AS tasktitle, 
+    t.whyholded AS taskwhyholded
+    from tasks AS t
+    INNER JOIN projects AS p ON p.id = t.project
+    INNER JOIN users AS u ON t.user=u.id
+    WHERE t.whyholded <> "" `;
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
+export const getInProgress = (req, res) => {
+    const q = `
+    SELECT 
+    p.id AS projectid,
+    u.name AS username, 
+    p.name AS projectname, 
+    t.title AS tasktitle
+    from tasks AS t
+    INNER JOIN projects AS p ON p.id = t.project
+    INNER JOIN users AS u ON t.user=u.id
+    WHERE t.status = 1 AND t.whyholded = "" AND p.status <> 2`;
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
 export const getLast = (req, res) => {
     const q = `SELECT * from tasks ORDER BY id DESC LIMIT 1 `;
     db.query(q, (err, data) => {

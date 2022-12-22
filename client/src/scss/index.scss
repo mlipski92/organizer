@@ -112,6 +112,17 @@
         margin: 10px;
         border: 1px solid #fffb4f;
         border-radius: 3px;
+        &-user {
+            display: block;
+            margin-top: 20px;
+            background-color: #fff;
+            width: max-content;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Raleway', sans-serif;
+        }
         &-item {
             background: #262626;
             padding: 30px 25px;
