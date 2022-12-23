@@ -42,18 +42,13 @@ const TasksPage = () => {
     const [currentProjectStatus, setCurrentProjectStatus] = useState(null);
     const {currentUser, setCurrentUser} = useContext(UsersContext);
     const [message, setMessage] = useState(taskObject.message);
-    const [empty, setEmpty] = useState(false);
 
 
     useEffect( () => {
         axios.post(`http://localhost:8800/tasks/get/${id}`)
         .then(response => {
-            // if (JSON.stringify(response.data) === "[]") {
-            //     setEmpty(true);
-            // } else {
-                tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
-                setCurrentProject(id);
-            // }
+            tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+            setCurrentProject(id);
         }).catch(error => {
             console.log(error)
         })

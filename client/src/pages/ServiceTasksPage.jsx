@@ -73,6 +73,7 @@ const ServiceTasksPage = () => {
                         <div className="mainPart__main-title"><AddServiceTask /></div>
                     </ServiceTaskContext.Provider>
                     <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask, tickingServiceTask, setTickingServiceTask, setMessage}}>
+                        {JSON.stringify(servicetasks.serviceTasksData) === "[]" ? <span className="emptyTable">Brak projektów na ten moment...</span> : null} 
                         { servicetasks.loading ? 'Loading' : <MapData data={servicetasks.serviceTasksData} />}
                     </ServiceTaskContext.Provider>  
                 </div>

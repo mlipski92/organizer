@@ -41,6 +41,7 @@ const ServicesPage = () => {
         </ServicesContext.Provider>
 
         <ServicesContext.Provider value={{servicesDispatch, setAddingService, addingService, deleteService, setDeleteService, setMessage}}>
+            {JSON.stringify(services.servicesData) === "[]" ? <span className="emptyTable">Brak projektów na ten moment...</span> : null}   
             {services.loading ? 'Loading' : <MapData data={services.servicesData} />}
         </ServicesContext.Provider>
 
