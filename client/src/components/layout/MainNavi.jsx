@@ -21,7 +21,7 @@ const MainNavi = () => {
                         <a href="" className="naviPart__a">Oczekujący użytkownicy</a>
                     </li>
                     <li className="naviPart__item">
-                        <a href="" className="naviPart__a">Moje zadania</a>
+                        <Link to="/mytasks"><span className="naviPart__a">Moje zadania</span></Link>
                     </li>
                 </ul>
             </div>

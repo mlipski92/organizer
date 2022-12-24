@@ -64,6 +64,25 @@
 
   }
 
+  .notAllowed {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__alert {
+        background-color: #70721b;
+        padding: 20px 19px;
+        border-radius: 13px;
+        color: white;
+        font-weight: 400;
+        font-family: 'Quicksand', sans-serif;
+    }
+  }
+
   .emptyTable {
     color: #fff;
     font-size: 18px;
@@ -78,9 +97,9 @@
   }
 
 .main-page {
-    &__inprogress-tasks {
+    &__inprogress-tasks, &__my-tasks {
         width: 100%;
-        margin: 10px;
+        margin: 10px 0;
         border: 5px solid #060606;
         border-radius: 3px;
         box-sizing: border-box;

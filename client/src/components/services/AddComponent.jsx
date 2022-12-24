@@ -51,12 +51,6 @@ export const AddServiceModal = (props) => {
     const { addingService, setAddingService, servicesDispatch } = useContext(ServicesContext);
     const { setMessage } = useContext(ServicesContext);
 
-    // const inputChangeHandler = e => {
-    //     setAddingService({
-    //             ...addingService, [name.current.name]: e.target.value
-    //     });    
-    // }
-
     const inputChangeHandler = e => {
         const { inputType } = e.nativeEvent;
         if(inputType === 'deleteContentBackward') {
@@ -100,8 +94,6 @@ export const AddServiceModal = (props) => {
                         servicesDispatch({ type: 'FETCH_ERROR' })
                     })
 
-
-                    // servicesDispatch({ type: 'ADD_SUCCESS', payload: addingService });
                     setAddingService(null);
                     
                 })

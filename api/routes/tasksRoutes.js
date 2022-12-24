@@ -1,9 +1,10 @@
 import express from 'express';
-import { getAll, deleteItem, tickItem, holdItem, addItem, getLast, getHolded, getInProgress } from "../controllers/tasksController.js";
+import { getAll, deleteItem, tickItem, holdItem, addItem, getLast, getHolded, getInProgress, getMyTasks } from "../controllers/tasksController.js";
 
 const router = express.Router();
 
 router.post('/get/:id', getAll);
+router.post('/mytasks', getMyTasks);
 router.post('/getholded', getHolded);
 router.post('/getinprogress', getInProgress);
 router.post('/getlast', getLast);

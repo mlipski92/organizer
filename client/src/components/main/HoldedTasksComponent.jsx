@@ -2,17 +2,22 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const MapHoldedTasks = (props) => {
-    console.log(props.data)
-    return props.data.map( el => (
+const HoldedTaskItem = (props) => {
+    const {tasktitle,taskwhyholded,username,projectid} = props.elData;
+    return (
         <>
             <div className="main-page__holded-tasks-item">
-                <Link to={"/tasks/"+el.projectid} className="main-page__holded-tasks-title">{el.tasktitle}</Link>
-                <span className="main-page__holded-tasks-desc">{el.taskwhyholded}</span>
-                <span className="main-page__holded-tasks-user">{el.username}</span>
+                <Link to={"/tasks/"+projectid} className="main-page__holded-tasks-title">{tasktitle}</Link>
+                <span className="main-page__holded-tasks-desc">{taskwhyholded}</span>
+                <span className="main-page__holded-tasks-user">{username}</span>
             </div>
         </>
-    ));
+    )
+}
+
+const MapHoldedTasks = (props) => {
+    console.log(props.data)
+    return props.data.map( el => <HoldedTaskItem elData={el} key={el.id} />);
 }
 
 const HoldedTasksComponent = () => {
