@@ -43,7 +43,14 @@ const HoldedTasksComponent = () => {
                     </h2>
                 </div>
                 <div className="main-page__holded-tasks-items">
-                    {holdedTasks !== null ? <MapHoldedTasks data={holdedTasks} /> : <p>brak</p>}
+                    {holdedTasks !== null ? (
+                        <>
+
+                        { JSON.stringify(holdedTasks) === "[]" ? (
+                                <span className="emptyTable">Brak zadań na ten moment</span>
+                            ) : <MapHoldedTasks data={holdedTasks} /> }
+                        </>
+                    ) :  <span className="emptyTable">Ładowanie</span>}
                 </div>
             </div>
         </>

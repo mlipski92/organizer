@@ -32,6 +32,8 @@ const InProgressTasksComponent = () => {
         });
     }, []);
 
+    console.log("inprogress "+(JSON.stringify(inProgressTasks) === "[]"));
+
     return (
         <>
             <div className="main-page__inprogress-tasks">
@@ -41,7 +43,13 @@ const InProgressTasksComponent = () => {
                     </h2>
                 </div>
                 <div className="main-page__inprogress-tasks-items">
-                    {inProgressTasks !== null ? <MapInProgressTasks data={inProgressTasks} /> : <p>brak</p>}
+                    {inProgressTasks !== null ? (
+                        <>
+                            { JSON.stringify(inProgressTasks) === "[]" ? (
+                                <span className="emptyTable">Brak zadań na ten moment</span>
+                            ) : <MapInProgressTasks data={inProgressTasks} /> }
+                        </>
+                    ) : <span className="emptyTable">Ładowanie</span>}
                 </div>
             </div>
         </>

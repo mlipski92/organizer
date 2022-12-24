@@ -62,15 +62,27 @@ const StructureComponent = () => {
   }, [isAuthenticated, setCurrentUser,currentUser]);
 
   return (
-    
-    isAuthenticated ? (
-      isAllowed ? (
-        <>
-          <MainLayout currentUser={currentUser} setCurrentUser={setCurrentUser} />
-        </>
-      ) : isLoading ? null : <div className="notAllowed"><span className="notAllowed__alert">Nie zostałeś dopuszczony do treści.</span></div>
+    <>
+        {isAllowed !== null ? (
+          isAuthenticated ? (
+            isAllowed ? (
+              <>
+                <MainLayout currentUser={currentUser} setCurrentUser={setCurrentUser} />
+              </>
+            ) : isLoading ? null : <div className="notAllowed"><span className="notAllowed__alert">Nie zostałeś dopuszczony do treści.</span></div>
 
-    ) : <MainLoginComponent loginWithRedirect={loginWithRedirect} />
+          ) : <MainLoginComponent loginWithRedirect={loginWithRedirect} />
+        ) : (
+          <>
+            <div className="loading-page">
+              <div className="loading-page__spinner">
+                <div className="lds-dual-ring"></div>          
+              </div>
+            </div>
+          </>
+        )}
+    </>
+
   )
 }
 
