@@ -1,4 +1,27 @@
+import axios from "axios";
+import { useEffect, useReducer, useState } from "react";
+import usersReducer from "../../reducers/usersReducer";
+import MapUsersData from "./MapUsersData";
+
+const initialUsersState = {
+    loading: true,
+    error: '',
+    usersData: {}
+}
+
 const UsersListComponent = () => {
+    const [users, usersDispatch] = useReducer(usersReducer, initialUsersState);
+
+    useEffect(() => {
+        axios.post('http://localhost:8800/users/all')
+        .then(response => {
+            usersDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
+        })
+        .catch(error => {
+            usersDispatch({ type: 'FETCH_ERROR' })
+        })
+    },[])
+
     return (
         <>
             <div className="mainApp__part-inside">
@@ -7,20 +30,9 @@ const UsersListComponent = () => {
                 </div>
                 <div className="mainApp__part-body">
                     <div className="usersPart__list">
-                        <div className="usersPart__item">
-                            <div className="usersPart__columns">
-                                <div className="usersPart__column">
-                                    <img src="img/tymczasowe_user.jpg" alt="" className="usersPart__img" />
-                                </div>
-                                <div className="usersPart__column userInfo">
-                                    <div className="userInfo__info">
-                                        <span className="usersPart__title">Matusz Lipski</span>
-                                        <span className="usersPart__status">Połączony</span>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
+
+                        <MapUsersData data={users.usersData} />
+
                     </div>
                 </div>
             </div>

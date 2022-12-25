@@ -9,8 +9,16 @@ export const addItem = (req, res) => {
     })
 }
 
-export const allItems = (req, res) => {
+export const getCurrent = (req, res) => {
     const q = `SELECT * FROM users WHERE socialident = "${req.body.socialident}"`;
+    db.query(q, (err, data) => {
+       if (err) return res.json(err);
+       return res.status(200).json(data);
+    })
+}
+
+export const allItems = (req, res) => {
+    const q = `SELECT * FROM users WHERE allowed = 1`;
     db.query(q, (err, data) => {
        if (err) return res.json(err);
        return res.status(200).json(data);

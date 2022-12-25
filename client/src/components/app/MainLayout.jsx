@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+
 import { UsersContext, usersObject } from "../../contexts/UsersContext";
-import MainNavi from "../layout/MainNavi";
+
+import MainNaviComponent from "./MainNaviComponent";
 import HeaderComponent from "./HeaderComponent";
 import UsersListComponent from "./UsersListComponent";
 
@@ -12,7 +14,7 @@ const MainLayout = (props) => {
                     <HeaderComponent />
                     <div className="mainApp__parts">
                         <div className="mainApp__part naviPart">
-                          <MainNavi />
+                          <MainNaviComponent />
                         </div>
                         <div className="mainApp__part mainPart">
 

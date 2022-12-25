@@ -65,20 +65,16 @@ const StructureComponent = () => {
     <>
         {isAllowed !== null ? (
           isAuthenticated ? (
-            isAllowed ? (
-              <>
-                <MainLayout currentUser={currentUser} setCurrentUser={setCurrentUser} />
-              </>
-            ) : isLoading ? null : <div className="notAllowed"><span className="notAllowed__alert">Nie zostałeś dopuszczony do treści.</span></div>
-
+            isAllowed ? <MainLayout currentUser={currentUser} setCurrentUser={setCurrentUser} /> : isLoading ? null : <div className="notAllowed"><span className="notAllowed__alert">Nie zostałeś dopuszczony do treści.</span></div>
           ) : <MainLoginComponent loginWithRedirect={loginWithRedirect} />
         ) : (
           <>
-            <div className="loading-page">
+            {/* <div className="loading-page">
               <div className="loading-page__spinner">
                 <div className="lds-dual-ring"></div>          
               </div>
-            </div>
+            </div> */}
+            <MainLoginComponent loginWithRedirect={loginWithRedirect} />
           </>
         )}
     </>
