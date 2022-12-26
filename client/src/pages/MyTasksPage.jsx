@@ -1,66 +1,28 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useContext } from "react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { UsersContext } from "../contexts/UsersContext";
+import { useEffect, useReducer } from "react";
+import MapData from "../components/mytasks/MapDataComponent";
+import { TaskContext } from "../contexts/TasksContext";
+import myTasksReducer from "../reducers/myTasksReducer";
 
-const MyTaskItem = (props) => {
-    return (
-        <>
-            <div className="main-page__my-tasks-item">
-                <Link to={"/tasks/"+props.projectid} className="main-page__my-tasks-title">{props.title}</Link>
-                <span className="main-page__my-tasks-desc">Projekt</span>
-            </div>
-        </>
-    )
-}
-
-const MapMyTasks = (props) => {
-    return props.data.map( el => (
-        <>
-            <MyTaskItem projectid={el.projectid} title={el.title} key={el.id} />
-        </>
-    ));
+const initialMyTasksState = {
+    loading: true,
+    error: '',
+    myTasksData: {}
 }
 
 
 const MyTasksPage = () => {
-    const [ myTasks, setMyTasks ] = useState(null);
-    const { user, isLoading, error } = useAuth0();
-    const { currentUser, setCurrentUser } = useContext(UsersContext);
-    const [ currentUserId, setCurrentUserId ] = useState(null);
-    
-
-    // axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
-    // axios.post(`http://localhost:8800/tasks/mytasks`, {userid: currentUserId})
-
-    //ZROBIĆ POPRZEZ REDUCER
+    const [myTasks, myTasksDispatch] = useReducer(myTasksReducer, initialMyTasksState);
 
     useEffect(() => {
-        console.log("Current user: "+currentUser);
-        (async () => {
-            await axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
-            .then( response => { (async () => {
-                await setCurrentUserId(13);
-                console.log("cid"+currentUserId);
-            })()
-                
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            
-        })();
-
-        
-
-
-        
-
-
-    }, [setCurrentUserId]);
-
+        axios.post('http://localhost:8800/tasks/mytasks')
+        .then(response => {
+            myTasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
+        })
+        .catch(error => {
+            myTasksDispatch({ type: 'FETCH_ERROR' })
+        })
+    },[])
 
     return (
         <>
@@ -71,7 +33,10 @@ const MyTasksPage = () => {
                     </h2>
                 </div>
                 <div className="main-page__my-tasks-items">
-                    {myTasks !== null ? <MapMyTasks data={myTasks} /> : <p>brak</p>}
+                    <TaskContext.Provider value={{myTasksDispatch}}>
+                        {JSON.stringify(myTasks.myTasksData) === "[]" ? <span className="emptyTable">Brak zadań na ten moment...</span> : null}
+                        {myTasks.loading ? 'Loading' : <MapData data={myTasks.myTasksData} />}
+                    </TaskContext.Provider>
                 </div>
             </div>
         </>

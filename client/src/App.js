@@ -61,6 +61,8 @@ const StructureComponent = () => {
     console.log(isAllowed);
   }, [isAuthenticated, setCurrentUser,currentUser]);
 
+
+  //NIE DZIAŁA LOGOWANIE. ZA KAŻDYM RAZEM WYŚWIETLA SIĘ PLANSZA W LOGOWANIEM< KTÓRA PRZEKIEROWUJE NA LOGOWANIE PO ZALOGOWANIU
   return (
     <>
         {isAllowed !== null ? (

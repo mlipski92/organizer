@@ -3,6 +3,8 @@ import { createContext } from "react";
 export const taskObject = {
     tasks: null,
     setTasks: () => {},
+    myTasks: null,
+    setMyTasks: () => {},
     deleteTask: null,
     setDeleteTask: (id) => {},
     addingTask: null, 
