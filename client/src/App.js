@@ -17,6 +17,7 @@ import MainPage from './pages/MainPage';
 import MyTasksPage from './pages/MyTasksPage';
 import MainLoginComponent from './components/app/MainLoginComponent';
 import MainLayout from './components/app/MainLayout';
+import DisallowedUsersPage from './pages/DisallowedUsersPage';
 
 
 const StructureComponent = () => {
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
       {
         path: '/mytasks',
         element: <MyTasksPage />
+      },
+      {
+        path: '/disallowed-users',
+        element: <DisallowedUsersPage />
       }
       ]
     }

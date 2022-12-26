@@ -15,10 +15,10 @@ const MainNavi = () => {
                         <Link to="/projects/archived"><span className="naviPart__a">Archiwum projektów</span></Link>
                     </li>
                     <li className="naviPart__item">
-                        <a href="/services" className="naviPart__a">Bieżąca obsługa</a>
+                        <Link to="/services"><span className="naviPart__a">Bieżąca obsługa</span></Link>
                     </li>
                     <li className="naviPart__item">
-                        <a href="" className="naviPart__a">Oczekujący użytkownicy</a>
+                        <Link to="/disallowed-users"><span className="naviPart__a">Oczekujący użytkownicy</span></Link>
                     </li>
                     <li className="naviPart__item">
                         <Link to="/mytasks"><span className="naviPart__a">Moje zadania</span></Link>
