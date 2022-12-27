@@ -7,12 +7,6 @@ const EditModal = (props) => {
     const name = useRef(true);
     const {editingProject, setEditingProject, projectsDispatch, setMessage} = useContext(ProjectContext);
 
-    // const inputChangeHandler = e => {
-    //     setEditingProject({
-    //             ...editingProject, [name.current.name]: e.target.value
-    //     });     
-    // }
-
     const inputChangeHandler = e => {
         const { inputType } = e.nativeEvent;
         if(inputType === 'deleteContentBackward') {

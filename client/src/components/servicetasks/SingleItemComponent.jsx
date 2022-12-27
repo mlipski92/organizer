@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext } from "react";
 
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
@@ -20,8 +19,7 @@ const DeleteButton = (props) => (
 )
 
 const SingleItem = (props) => {
-    const {serviceTasksDispatch} = useContext(ServiceTaskContext);
-    const {deleteServiceTask, setDeleteServiceTask} = useContext(ServiceTaskContext);
+    const {setDeleteServiceTask} = useContext(ServiceTaskContext);
 
     
 

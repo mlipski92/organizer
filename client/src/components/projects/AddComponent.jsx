@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useEffect, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
 
 
 export const AddProject = () => {
-    const { addingProject, setAddingProject } = useContext(ProjectContext);
+    const { setAddingProject } = useContext(ProjectContext);
 
     const addProjectHandler = () => {
         setAddingProject(
@@ -51,12 +51,6 @@ export const AddProjectModal = (props) => {
 
     const { addingProject, setAddingProject, projectsDispatch } = useContext(ProjectContext);
     const { setMessage } = useContext(ProjectContext);
-
-    // const inputChangeHandler = e => {
-    //     setAddingProject({
-    //             ...addingProject, [name.current.name]: e.target.value
-    //     });    
-    // }
 
     const inputChangeHandler = e => {
         const { inputType } = e.nativeEvent;
@@ -104,7 +98,6 @@ export const AddProjectModal = (props) => {
                     setAddingProject(null);
                 })
                 .catch(error => {
-                    // setMessage('test')
                     console.log(error);
                 })
             } else {

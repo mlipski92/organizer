@@ -10,7 +10,6 @@ export const getAll = (req, res) => {
 }
 
 export const getMyTasks = (req, res) => {
-    // const q = `SELECT * from tasks`;
     const q = `SELECT title, tasks.id, projects.id AS projectid, name from tasks INNER JOIN projects ON projects.id = tasks.project WHERE user = "${req.body.userid}" `;
     db.query(q, (err, data) => {
        if (err) return res.json(err);

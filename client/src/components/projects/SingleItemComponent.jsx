@@ -4,8 +4,8 @@ import { ProjectContext } from "../../contexts/ProjectsContext";
 import { useContext } from 'react';
 
 const SingleItem = (props) => {
-    const { edditingProject, setEditingProject } = useContext(ProjectContext);
-    const { deleteProject, setDeleteProject } = useContext(ProjectContext);
+    const { setEditingProject } = useContext(ProjectContext);
+    const { setDeleteProject } = useContext(ProjectContext);
     const { projectsDispatch } = useContext(ProjectContext);
     const { archivingProject, setArchivingProject } = useContext(ProjectContext);
 

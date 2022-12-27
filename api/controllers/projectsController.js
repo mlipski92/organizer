@@ -26,7 +26,6 @@ export const archived = (req, res) => {
 }
 
 export const editItem = (req, res) => {
-    // const q = "UPDATE projects SET name = '" + req.body.name + "' WHERE id = " + req.params.id;
     const q = "UPDATE projects SET name = '"+req.body.name+"' WHERE id = " + req.params.id;
     db.query(q, (err, data) => {
        if (err) return res.json(err);

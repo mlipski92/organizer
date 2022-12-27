@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
-import { UsersContext, usersObject } from './contexts/UsersContext';
+import { usersObject } from './contexts/UsersContext';
 
 import './scss/index.scss';
 
@@ -21,7 +21,7 @@ import DisallowedUsersPage from './pages/DisallowedUsersPage';
 
 
 const StructureComponent = () => {
-  const { isAuthenticated, user, logout, loginWithRedirect, isLoading, error } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, isLoading } = useAuth0();
   const [ currentUser, setCurrentUser ] = useState(usersObject.currentUser);
   const [ isAllowed, setIsAllowed ] = useState(null);
 
@@ -46,7 +46,7 @@ const StructureComponent = () => {
             
         })
       } else {
-        console.log('niezalogowany');
+        //console.log('niezalogowany');
       }
 
       await setCurrentUser(user?.email)
@@ -59,7 +59,6 @@ const StructureComponent = () => {
         console.log(error);
       })
     })();
-    console.log(isAllowed);
   }, [isAuthenticated, setCurrentUser,currentUser]);
 
 
@@ -72,11 +71,6 @@ const StructureComponent = () => {
           ) : <MainLoginComponent loginWithRedirect={loginWithRedirect} />
         ) : (
           <>
-            {/* <div className="loading-page">
-              <div className="loading-page__spinner">
-                <div className="lds-dual-ring"></div>          
-              </div>
-            </div> */}
             <MainLoginComponent loginWithRedirect={loginWithRedirect} />
           </>
         )}

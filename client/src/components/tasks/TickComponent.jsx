@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { TaskContext } from "../../contexts/TasksContext";
 
 const TickTask = (props) => {
-    const { tasks, tasksDispatch } = useContext(TaskContext);
-    const { tickingTask, setTickingTask } = useContext(TaskContext);
+    const { tasksDispatch } = useContext(TaskContext);
+    const { setTickingTask } = useContext(TaskContext);
     const { setMessage } = useContext(TaskContext);
 
     const tickTaskHandler = async e => {

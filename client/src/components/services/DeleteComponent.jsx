@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { ServicesContext } from "../../contexts/ServicesContext";
 

@@ -11,7 +11,6 @@ const ArchiveProject = (props) => {
 
         await axios.post("http://localhost:8800/projects/archive/" + props.id)
         .then(response => {
-            console.log("Res data: "+response);
             props.projectsDispatch({ type: 'ARCHIVE_SUCCESS', payload: { id: props.id, name: props.name, status: 2} })
             
         })

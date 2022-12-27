@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 
 import ResumeComponent from './ResumeComponent';
 
@@ -39,7 +38,7 @@ const SingleItem = (props) => {
                         </div>
                     </div>
                     <div className="mainPart__column itemNavi">
-                        <ResumeComponent projectsDispatch={props.projectsDispatch} id={props.id} name={props.elData.name} setResumingProject={props.setResumingProject} />
+                        <ResumeComponent projectsDispatch={props.projectsDispatch} id={props.id} name={props.elData.name} />
                     </div>
                 </div>
             </div>

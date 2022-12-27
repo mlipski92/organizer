@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useContext, useEffect, useReducer, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useParams } from 'react-router-dom';
 
 import { TaskContext, taskObject } from '../contexts/TasksContext';
 import { UsersContext, usersObject } from '../contexts/UsersContext';
@@ -40,7 +39,6 @@ const TasksPage = () => {
     const [holdedTask, setHoldedTask] = useState(taskObject.holdedTask);
     const [currentProjectName, setCurrentProjectName] = useState(null);
     const [currentProjectStatus, setCurrentProjectStatus] = useState(null);
-    const {currentUser, setCurrentUser} = useContext(UsersContext);
     const [message, setMessage] = useState(taskObject.message);
 
 

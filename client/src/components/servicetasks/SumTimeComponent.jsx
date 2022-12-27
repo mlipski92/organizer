@@ -1,8 +1,3 @@
-import { useContext } from "react";
-
-import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
-
-
 const SumTimeComponent = (props) => {
     let allTasksTime = 0;
 
@@ -10,8 +5,6 @@ const SumTimeComponent = (props) => {
     allTasks.forEach(el => {
         allTasksTime = allTasksTime + parseInt(el.time);
     });
-
-
 
     return (
         <>

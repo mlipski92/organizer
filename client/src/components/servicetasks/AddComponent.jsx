@@ -7,8 +7,8 @@ import { UsersContext } from "../../contexts/UsersContext";
 
 
 export const AddServiceTask = () => {
-    const { addingServiceTask, setAddingServiceTask } = useContext(ServiceTaskContext);
-    const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
+    const { setAddingServiceTask } = useContext(ServiceTaskContext);
+    const { currentProject } = useContext(ServiceTaskContext);
     const { currentServiceName } = useContext(ServiceTaskContext);
 
     const addServiceTaskHandler = () => {
@@ -58,19 +58,11 @@ export const AddServiceTaskModal = (props) => {
     const title = useRef(true);
     const time = useRef(true);
     const { addingServiceTask, setAddingServiceTask, servicetasksDispatch } = useContext(ServiceTaskContext);
-    const { currentProject, setCurrentProject } = useContext(ServiceTaskContext);
-    const { currentUser, setCurrentUser } = useContext(UsersContext);
+    const { currentUser } = useContext(UsersContext);
     const [ currentUserId, setCurrentUserId ] = useState(null);
     const { setMessage } = useContext(ServiceTaskContext);
 
-    // const inputChangeHandler = e => {
-    //     setAddingServiceTask({
-    //             ...addingServiceTask, [e.target.name]: e.target.value, user: currentUserId
-    //     });  
-    // }
-
     const inputChangeHandler = e => {
-        console.log(e.target.name);
         const { name } = e.target;
         if(name === 'title') {
             const { inputType } = e.nativeEvent;
@@ -97,7 +89,6 @@ export const AddServiceTaskModal = (props) => {
             } else if(inputType === 'insertText') {
                 const singleChar = e.nativeEvent.data;
                 const allowedChars = "1234567890";
-                console.log(addingServiceTask.time);
         
                 if (allowedChars.includes(singleChar) && e.target.value < 300) {
                     setAddingServiceTask({
@@ -113,7 +104,6 @@ export const AddServiceTaskModal = (props) => {
             await axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
             .then(response => {
                 setCurrentUserId(response.data[0].id);
-                console.log(response.data[0].id);
             })
             .catch(error => {
                 console.log('Error');

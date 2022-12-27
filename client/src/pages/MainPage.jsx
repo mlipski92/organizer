@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import HoldedTasksComponent from "../components/main/HoldedTasksComponent";
 import InProgressTasksComponent from "../components/main/InProgressTasksComponent";
 
@@ -44,13 +45,9 @@ const MainPage = () => {
                     </div>
                 </div>
                 <div className="main-page__row">
-
                     <div className="main-page__col">
-
                         <HoldedTasksComponent />
-
                         <InProgressTasksComponent />
-
                     </div>
 
                 </div>

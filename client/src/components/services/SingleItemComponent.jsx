@@ -4,8 +4,7 @@ import { useContext } from 'react';
 import { ServicesContext } from '../../contexts/ServicesContext';
 
 const SingleItem = (props) => {
-    const { servicesDispatch } = useContext(ServicesContext);
-    const { deleteService, setDeleteService } = useContext(ServicesContext);
+    const { setDeleteService } = useContext(ServicesContext);
 
     const askDeleteServiceHandler = (id) => {
         setDeleteService(id);

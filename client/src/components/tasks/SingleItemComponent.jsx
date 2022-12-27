@@ -72,8 +72,8 @@ const WhyHoldedInfo = (props) => (
 
 
 const SingleItem = (props) => {
-    const {deleteTask, setDeleteTask} = useContext(TaskContext);
-    const {holdedTask, setHoldedTask} = useContext(TaskContext);
+    const {setDeleteTask} = useContext(TaskContext);
+    const {setHoldedTask} = useContext(TaskContext);
     const {currentProjectStatus} = useContext(TaskContext);
     const {tasksDispatch} = useContext(TaskContext);
 

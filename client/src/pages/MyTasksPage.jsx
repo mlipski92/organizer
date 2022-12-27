@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
-import MapData from "../components/mytasks/MapDataComponent";
+
 import { TaskContext } from "../contexts/TasksContext";
 import myTasksReducer from "../reducers/myTasksReducer";
+
+import MapData from "../components/mytasks/MapDataComponent";
+
 
 const initialMyTasksState = {
     loading: true,

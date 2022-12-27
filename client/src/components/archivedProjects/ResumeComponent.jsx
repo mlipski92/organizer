@@ -5,8 +5,8 @@ import { ProjectContext, projectObject } from "../../contexts/ProjectsContext";
 
 
 const ResumeComponent = (props) => {
-    const { projects, projectsDispatch } = useContext(ProjectContext);
-    const { resumingProject, setResumingProject } = useContext(ProjectContext);
+    const { projectsDispatch } = useContext(ProjectContext);
+    const { setResumingProject } = useContext(ProjectContext);
 
     const resumeProjectHandler = async () => {
         await setResumingProject({

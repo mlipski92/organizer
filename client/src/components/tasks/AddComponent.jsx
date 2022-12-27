@@ -6,8 +6,8 @@ import { TaskContext } from "../../contexts/TasksContext";
 import { UsersContext, usersObject } from "../../contexts/UsersContext";
 
 export const AddTask = () => {
-    const { addingTask, setAddingTask } = useContext(TaskContext);
-    const { currentProject, setCurrentProject } = useContext(TaskContext);
+    const { setAddingTask } = useContext(TaskContext);
+    const { currentProject } = useContext(TaskContext);
     const { currentProjectName } = useContext(TaskContext);
 
     const addTaskHandler = () => {
@@ -58,8 +58,7 @@ export const AddTaskModal = (props) => {
     const prior = useRef(true);
 
     const { addingTask, setAddingTask, tasksDispatch } = useContext(TaskContext);
-    const { currentProject, setCurrentProject } = useContext(TaskContext);
-    const { currentUser, setCurrentUser } = useContext(UsersContext);
+    const { currentUser } = useContext(UsersContext);
     const [ currentUserId, setCurrentUserId ] = useState(null);
     const { setMessage } = useContext(TaskContext);
 

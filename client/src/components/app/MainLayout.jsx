@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { UsersContext, usersObject } from "../../contexts/UsersContext";
@@ -17,7 +16,6 @@ const MainLayout = (props) => {
                           <MainNaviComponent />
                         </div>
                         <div className="mainApp__part mainPart">
-
                             <div className="mainApp__part-inside">
                                 <div className="mainApp__part-header">
                                     <h2 className="mainApp__part-h2"></h2>
@@ -28,8 +26,6 @@ const MainLayout = (props) => {
                                   </UsersContext.Provider> 
                                 </div>
                             </div>
-
-
                         </div>
                         <div className="mainApp__part usersPart">
                             <UsersListComponent />

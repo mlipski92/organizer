@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 import { TaskContext } from "../../contexts/TasksContext";
 
 const DeleteModal = (props) => {
     const { deleteTask, setDeleteTask } = useContext(TaskContext);
-    const { tasks, tasksDispatch } = useContext(TaskContext);
+    const { tasksDispatch } = useContext(TaskContext);
     const { setMessage } = useContext(TaskContext);
 
     const deleteTaskHandler = async e => {
@@ -26,10 +26,6 @@ const DeleteModal = (props) => {
         } else if (name === "cancelDelete") {
             setDeleteTask(null);
         }
-    }
-
-    const askDeleteTaskHandler = (id) => {
-        setDeleteTask(id);
     }
 
     return (

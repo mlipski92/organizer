@@ -7,7 +7,7 @@ import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
 
 const DeleteModal = (props) => {
     const { deleteServiceTask, setDeleteServiceTask } = useContext(ServiceTaskContext);
-    const { servicetasks, servicetasksDispatch } = useContext(ServiceTaskContext);
+    const { servicetasksDispatch } = useContext(ServiceTaskContext);
     const { setMessage } = useContext(ServiceTaskContext);
 
     
@@ -29,10 +29,6 @@ const DeleteModal = (props) => {
         } else if (name === "cancelDelete") {
             setDeleteServiceTask(null);
         }
-    }
-
-    const askDeleteTaskHandler = (id) => {
-        setDeleteServiceTask(id);
     }
 
 

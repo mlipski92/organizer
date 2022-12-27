@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import { TaskContext } from '../../contexts/TasksContext';
 
 const SingleItem = (props) => {
-    const { myTasksDispatch } = useContext(TaskContext);
  
     return(
     <>

@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useEffect, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 
 import { ServicesContext } from "../../contexts/ServicesContext";
 
 export const AddService = () => {
-    const { addingService, setAddingService } = useContext(ServicesContext);
+    const { setAddingService } = useContext(ServicesContext);
 
     const addServiceHandler = () => {
         setAddingService(
@@ -14,7 +14,6 @@ export const AddService = () => {
                 status: 1
             }
         );
-        console.log("Obsługa: "+JSON.stringify(addingService));
     }
 
 

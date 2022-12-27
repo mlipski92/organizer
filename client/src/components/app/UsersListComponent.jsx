@@ -30,9 +30,7 @@ const UsersListComponent = () => {
                 </div>
                 <div className="mainApp__part-body">
                     <div className="usersPart__list">
-
                         <MapUsersData data={users.usersData} />
-
                     </div>
                 </div>
             </div>

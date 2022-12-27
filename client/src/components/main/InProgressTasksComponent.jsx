@@ -32,8 +32,6 @@ const InProgressTasksComponent = () => {
         });
     }, []);
 
-    console.log("inprogress "+(JSON.stringify(inProgressTasks) === "[]"));
-
     return (
         <>
             <div className="main-page__inprogress-tasks">

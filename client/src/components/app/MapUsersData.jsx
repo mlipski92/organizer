@@ -1,5 +1,4 @@
 const SingleItem = (props) => {
-    console.log("Eldata: "+JSON.stringify(props.elData.name));
     return (
         <>
             <div className="usersPart__item">
@@ -10,7 +9,6 @@ const SingleItem = (props) => {
                     <div className="usersPart__column userInfo">
                         <div className="userInfo__info">
                             <span className="usersPart__title">{props.elData.name}</span>
-                            {/* <span className="usersPart__status">Połączony</span> */}
                         </div>
                     </div>
                 </div>
@@ -21,8 +19,6 @@ const SingleItem = (props) => {
 
 const MapUsersData = (props) => {
 
-
-    console.log("USers "+JSON.stringify(props.data));
     if (JSON.stringify(props.data) !== "{}") {
         const testMap = props.data.map( el => (
             <SingleItem 
@@ -34,19 +30,6 @@ const MapUsersData = (props) => {
         ));
         return testMap;
     }
-       
-    // if (props.data !== null) {
-    //     const mappedData = props.data[0].map( el => ( 
-    //     <SingleItem 
-    //         name={el.name} 
-    //         id={el.id} key={el.id} 
-    //         elData={el}
-    //         data={props.data} 
-    //     /> 
-    //     ));
-        
-    //     return mappedData;
-    // }
 }
 
 export default MapUsersData;

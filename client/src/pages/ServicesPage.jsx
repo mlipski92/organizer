@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useReducer } from 'react';
 
-import { ServicesContext, servicesObject } from '../contexts/ServicesContext';
 import servicesReducer from '../reducers/servicesReducer';
+
+import { ServicesContext, servicesObject } from '../contexts/ServicesContext';
 import MapData from '../components/services/MapDataComponent';
 import { AddService, AddServiceModal } from '../components/services/AddComponent';
 import DeleteModal from '../components/services/DeleteComponent';

@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { ServiceTaskContext } from "../../contexts/ServiceTasksContext";
 
 const TickServiceTask = (props) => {
-    const { servicetasks, servicetasksDispatch } = useContext(ServiceTaskContext);
-    const { tickingServiceTask, setTickingServiceTask } = useContext(ServiceTaskContext);
+    const { servicetasksDispatch } = useContext(ServiceTaskContext);
+    const { setTickingServiceTask } = useContext(ServiceTaskContext);
     const { setMessage } = useContext(ServiceTaskContext);
 
 
