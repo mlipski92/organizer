@@ -64,6 +64,26 @@
 
   }
 
+  .disallowUsersList {
+    color:#fff;
+    width: 100%;
+    &__button {
+        float:right;
+    }
+    &__row {
+        clear: both;
+        padding: 2px 4px;
+    }
+    &__row:nth-child(odd) {
+        background-color: #242424;
+    }
+
+    color:#fff;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Quicksand', sans-serif;
+  }
+
   .notAllowed {
     position: fixed;
     top:0;
@@ -609,6 +629,11 @@ body {
 
 .usersPart {
     width: 400px;
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     &__img {
         width: 55px;
         height: 55px;

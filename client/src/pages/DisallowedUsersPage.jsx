@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
+import MapData from "../components/disallowedUsers/MapDataComponent";
+import { UsersContext } from "../contexts/UsersContext";
 import disallowedUsersReducer from "../reducers/disallowedUsersReducer";
 
 const initialDisallowedUsersState = {
@@ -13,7 +15,7 @@ const DisallowedUsersPage = () => {
     
 
     useEffect(() => {
-        axios.post('http://localhost:8800/projects/all')
+        axios.post('http://localhost:8800/users/disallowed-users')
         .then(response => {
             disallowedUsersDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })
@@ -22,9 +24,16 @@ const DisallowedUsersPage = () => {
         })
     },[])
 
+
+
     return (
         <>
-            <p>test</p>
+            <UsersContext.Provider value={disallowedUsersDispatch}>
+                <div className="disallowUsersList">
+                    {JSON.stringify(disallowedUsers.disallowedUsersData) === "[]" ? <td><span className="emptyTable">Brak projektów na ten moment...</span></td> : null}   
+                    {disallowedUsers.loading ? 'Loading' : <MapData data={disallowedUsers.disallowedUsersData} />}
+                </div> 
+            </UsersContext.Provider>          
         </>
     )
 }

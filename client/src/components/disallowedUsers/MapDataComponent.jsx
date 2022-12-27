@@ -1,14 +1,6 @@
-import { useContext } from "react";
-
-import { TaskContext } from "../../contexts/TasksContext";
 import SingleItem from "./SingleItemComponent";
 
-
-
-
-
 const MapData = (props) => {
-    console.log(props.data)
     
     if (props.data !== null) {
         const mappedData = props.data && props.data.map( el => ( 

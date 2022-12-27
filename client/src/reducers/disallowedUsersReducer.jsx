@@ -6,6 +6,12 @@ const disallowedUsersReducer = (state, action) => {
                 disallowedUsersData: action.payload,
                 error: ''
             }
+        case 'ALLOW_SUCCESS':
+            return {
+                loading: false,
+                disallowedUsersData: state.disallowedUsersData.filter( el => el.id !== action.payload),
+                error: ''
+            }
         default:
             return state
     }

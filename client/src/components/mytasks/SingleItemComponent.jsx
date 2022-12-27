@@ -11,8 +11,8 @@ const SingleItem = (props) => {
             {
                 () => (
                     <div className="main-page__my-tasks-item">
-                        <Link to={"/tasks/"+props.projectid} className="main-page__my-tasks-title">{props.title}</Link>
-                        <span className="main-page__my-tasks-desc">Projekt</span>
+                        <Link to={"/tasks/"+props.elData.projectid} className="main-page__my-tasks-title">{props.elData.title}</Link>
+                        <span className="main-page__my-tasks-desc">{props.elData.name}</span>
                     </div>    
                 )
             }

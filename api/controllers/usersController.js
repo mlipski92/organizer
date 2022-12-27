@@ -48,3 +48,11 @@ export const currentUserId = (req, res) => {
        return res.status(200).json(data);
     })
 }
+
+export const allowUser = (req, res) => {
+    const showRecord = "UPDATE users SET allowed = 1 WHERE id = " + req.params.id;
+    db.query(showRecord, (err, data) => {
+        if(err) return res.json(err);
+        return res.status(200).json(data);
+    })
+}

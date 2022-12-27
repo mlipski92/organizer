@@ -1,5 +1,5 @@
 import express from 'express';
-import { addItem, getCurrent, checkIfAllowed, currentUserId, allItems, disallowedUsers } from "../controllers/usersController.js";
+import { addItem, getCurrent, checkIfAllowed, currentUserId, allItems, disallowedUsers, allowUser } from "../controllers/usersController.js";
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.post('/getcurrentid/:id', currentUserId);
 router.post('/checkifallowed', checkIfAllowed);
 router.post('/all', allItems);
 router.post('/disallowed-users', disallowedUsers);
+router.post('/allow-user/:id', allowUser);
 
 export default router;
