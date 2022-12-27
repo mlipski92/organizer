@@ -77,9 +77,9 @@ const SingleItem = (props) => {
                                                 </div>
                                         </div>
                                         <div className="mainPart__row">
-                                            <div className="mainPart__progress--done" data={props.data}>
+                                            {/* <div className="mainPart__progress--done" data={props.data}>
                                                 W toku
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>

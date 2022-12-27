@@ -40,7 +40,7 @@ const MainPage = () => {
                         <div className="main-page__service-preview">
                             <span>Niezafakturowane minuty: <strong>{allTime} godz.</strong></span>
                             <span>Do ściągnięcia: <strong>{salary}zł</strong></span>
-                            <Link to="/" className="main-page__button">Zobacz obsługę</Link>
+                            <Link to="/services" className="main-page__button">Zobacz obsługę</Link>
                         </div>
                     </div>
                 </div>

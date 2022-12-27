@@ -38,9 +38,7 @@ const tasksReducer = (state, action) => {
             return {
                 loading: false,
                 tasksData: state.tasksData.map( el => {
-                    // el.id === action.payload.id ? action.payload : el
                     if (el.id === action.payload) {
-                        console.log("test tets");
                         el.whyholded = '';
                     }
                     return el;
@@ -48,7 +46,6 @@ const tasksReducer = (state, action) => {
             }),
                 error: ''
             }
-            // console.log("moje id " + JSON.stringify(action.payload))
         default:
             return state
     }

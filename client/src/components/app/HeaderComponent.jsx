@@ -9,7 +9,7 @@ const HeaderComponent = () => {
             <div className="mainApp__header">
                 <div className="mainApp__header-columns">
                     <div className="mainApp__header-column">
-                        Test: {isAuthenticated ? 'zalogowany' : 'niezalogowany'}
+                        <a href="/">LOGO</a>
                     </div>
                     <div className="mainApp__header-column userNavi">
                         <div className="userNavi__container">
