@@ -34,7 +34,7 @@ const ArchivedProjectsPage = () => {
             <div className="mainPart__projects">
                 <div className="mainPart__list">
                     {JSON.stringify(projects.projectsData) === "[]" ? <span className="emptyTable">Brak projektów na ten moment...</span> : null} 
-                    { projects.loading ? "Loading" : <MapData data={projects.projectsData} /> }
+                    { projects.loading ? <span className="loadingText">Ładowanie...</span> : <MapData data={projects.projectsData} /> }
                 </div>
             </div>
         </ProjectContext.Provider>

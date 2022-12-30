@@ -42,7 +42,7 @@ const ProjectsPage = () => {
             
             <ProjectContext.Provider value={{projectsDispatch, setEditingProject, setDeleteProject, setArchivingProject, archivingProject}}>
                 {JSON.stringify(projects.projectsData) === "[]" ? <span className="emptyTable">Brak projektów na ten moment...</span> : null}
-                {projects.loading ? 'Loading' : <MapData data={projects.projectsData} />}
+                {projects.loading ? <span className="loadingText">Ładowanie...</span> : <MapData data={projects.projectsData} />}
             </ProjectContext.Provider>
 
             <ProjectContext.Provider value={{editingProject, setEditingProject, projectsDispatch, setMessage}}>

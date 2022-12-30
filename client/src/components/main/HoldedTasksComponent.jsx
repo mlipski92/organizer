@@ -16,8 +16,7 @@ const HoldedTaskItem = (props) => {
 }
 
 const MapHoldedTasks = (props) => {
-    console.log(props.data)
-    return props.data.map( el => <HoldedTaskItem elData={el} key={el.id} />);
+    return props.data.map( el => <HoldedTaskItem elData={el} id={el.id} key={el.id} />);
 }
 
 const HoldedTasksComponent = () => {
@@ -45,10 +44,9 @@ const HoldedTasksComponent = () => {
                 <div className="main-page__holded-tasks-items">
                     {holdedTasks !== null ? (
                         <>
-
-                        { JSON.stringify(holdedTasks) === "[]" ? (
-                                <span className="emptyTable">Brak zadań na ten moment</span>
-                            ) : <MapHoldedTasks data={holdedTasks} /> }
+                            { JSON.stringify(holdedTasks) === "[]" ? (
+                                    <span className="emptyTable">Brak zadań na ten moment</span>
+                                ) : <MapHoldedTasks data={holdedTasks} /> }
                         </>
                     ) :  <span className="emptyTable">Ładowanie</span>}
                 </div>

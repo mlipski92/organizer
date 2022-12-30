@@ -31,7 +31,7 @@ const DisallowedUsersPage = () => {
             <UsersContext.Provider value={disallowedUsersDispatch}>
                 <div className="disallowUsersList">
                     {JSON.stringify(disallowedUsers.disallowedUsersData) === "[]" ? <td><span className="emptyTable">Brak projektów na ten moment...</span></td> : null}   
-                    {disallowedUsers.loading ? 'Loading' : <MapData data={disallowedUsers.disallowedUsersData} />}
+                    {disallowedUsers.loading ? <span className="loadingText">Ładowanie...</span> : <MapData data={disallowedUsers.disallowedUsersData} />}
                 </div> 
             </UsersContext.Provider>          
         </>

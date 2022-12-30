@@ -38,7 +38,7 @@ const MyTasksPage = () => {
                 <div className="main-page__my-tasks-items">
                     <TaskContext.Provider value={{myTasksDispatch}}>
                         {JSON.stringify(myTasks.myTasksData) === "[]" ? <span className="emptyTable">Brak zadań na ten moment...</span> : null}
-                        {myTasks.loading ? 'Loading' : <MapData data={myTasks.myTasksData} />}
+                        {myTasks.loading ? <span className="loadingText">Ładowanie...</span> : <MapData data={myTasks.myTasksData} />}
                     </TaskContext.Provider>
                 </div>
             </div>

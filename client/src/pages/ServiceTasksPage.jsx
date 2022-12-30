@@ -65,7 +65,7 @@ const ServiceTasksPage = () => {
     return (
         <>
 
-            { servicetasks.loading ? 'Loading' : <SumTimeComponent allTasks={servicetasks.serviceTasksData} /> }
+            { servicetasks.loading ? <span className="loadingText">Ładowanie...</span> : <SumTimeComponent allTasks={servicetasks.serviceTasksData} /> }
        
             <div className="mainPart__projects">
                 <div className="mainPart__list">
@@ -74,7 +74,7 @@ const ServiceTasksPage = () => {
                     </ServiceTaskContext.Provider>
                     <ServiceTaskContext.Provider value={{servicetasksDispatch, deleteServiceTask, setDeleteServiceTask, tickingServiceTask, setTickingServiceTask, setMessage}}>
                         {JSON.stringify(servicetasks.serviceTasksData) === "[]" ? <span className="emptyTable">Brak projektów na ten moment...</span> : null} 
-                        { servicetasks.loading ? 'Loading' : <MapData data={servicetasks.serviceTasksData} />}
+                        { servicetasks.loading ? <span className="loadingText">Ładowanie...</span> : <MapData data={servicetasks.serviceTasksData} />}
                     </ServiceTaskContext.Provider>  
                 </div>
             </div>

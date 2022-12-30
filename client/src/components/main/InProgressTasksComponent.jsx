@@ -16,7 +16,7 @@ const InProgressItem = (props) => {
 }
 
 const MapInProgressTasks = (props) => {
-    return props.data.map( el => <InProgressItem elData={el} key={el.id} />);
+    return props.data.map( el => <InProgressItem elData={el} id={el.id} key={el.id} />);
 }
 
 const InProgressTasksComponent = () => {
