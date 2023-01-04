@@ -23,7 +23,7 @@ const InProgressTasksComponent = () => {
     const [ inProgressTasks, setInProgressTasks ] = useState(null);
 
     useEffect(() => {
-        axios.post(`http://localhost:8800/tasks/getinprogress`)
+        axios.post(`http://netcentrum.pl/api/tasks/getinprogress`)
         .then(response => {
             setInProgressTasks(response.data)
 

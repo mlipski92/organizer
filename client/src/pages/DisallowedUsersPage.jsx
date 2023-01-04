@@ -15,7 +15,7 @@ const DisallowedUsersPage = () => {
     
 
     useEffect(() => {
-        axios.post('http://localhost:8800/users/disallowed-users')
+        axios.post('http://netcentrum.pl/api/users/disallowed-users')
         .then(response => {
             disallowedUsersDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })

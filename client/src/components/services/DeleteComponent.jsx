@@ -13,7 +13,7 @@ const DeleteModal = (props) => {
         
         
         if ( name === "confirmDelete") {
-            await axios.post("http://localhost:8800/services/delete/" + deleteService)
+            await axios.post("http://netcentrum.pl/api/services/delete/" + deleteService)
             .then(response => {
                 servicesDispatch({ type: 'DELETE_SUCCESS', payload: deleteService })
                 setMessage({msg: "Projekt został usunięty!", type: "SUCCESS"});
@@ -21,7 +21,7 @@ const DeleteModal = (props) => {
             .catch(error => {
                 console.log(0);
             })
-            await axios.post("http://localhost:8800/services/deleteCommonTasks/" + deleteService)
+            await axios.post("http://netcentrum.pl/api/services/deleteCommonTasks/" + deleteService)
             .then(response => {
                 console.log(1);
             })

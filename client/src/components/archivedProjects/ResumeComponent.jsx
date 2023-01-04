@@ -15,7 +15,7 @@ const ResumeComponent = (props) => {
             status: 1
         });
 
-        await axios.post("http://localhost:8800/projects/resume/" + props.id)
+        await axios.post("http://netcentrum.pl/api/projects/resume/" + props.id)
         .then(response => {
             projectsDispatch({ type: 'RESUME_SUCCESS', payload: { id: props.id, name: props.name, status: 1} });
         })

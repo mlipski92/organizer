@@ -15,7 +15,7 @@ const DeleteModal = (props) => {
         const { name } = e.target;
 
         if ( name === "confirmDelete") {
-            await axios.post("http://localhost:8800/servicetasks/delete/" + deleteServiceTask) 
+            await axios.post("http://netcentrum.pl/api/servicetasks/delete/" + deleteServiceTask) 
             .then(response => {
                 servicetasksDispatch({ type: 'DELETE_SUCCESS', payload: deleteServiceTask })
                 setMessage({msg: "Zadanie zostało usunięte!", type: "SUCCESS"});

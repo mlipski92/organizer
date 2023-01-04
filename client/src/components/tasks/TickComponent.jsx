@@ -11,7 +11,7 @@ const TickTask = (props) => {
     const tickTaskHandler = async e => {
         await setTickingTask(props.id);
 
-        await axios.post("http://localhost:8800/tasks/tick/" + props.id)
+        await axios.post("http://netcentrum.pl/api/tasks/tick/" + props.id)
         .then(response => {
             const newData = {...props.itemData, status: 2};
             setMessage({msg: "Zadanie zostało zrobione!", type: "SUCCESS"});

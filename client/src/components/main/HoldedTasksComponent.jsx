@@ -23,7 +23,7 @@ const HoldedTasksComponent = () => {
     const [ holdedTasks, setHoldedTasks ] = useState(null);
 
     useEffect(() => {
-        axios.post(`http://localhost:8800/tasks/getholded`)
+        axios.post(`http://netcentrum.pl/api/tasks/getholded`)
         .then(response => {
             setHoldedTasks(response.data)
 

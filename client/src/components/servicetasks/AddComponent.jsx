@@ -101,7 +101,7 @@ export const AddServiceTaskModal = (props) => {
 
     useEffect(() => {
         (async () => {
-            await axios.post('http://localhost:8800/users/getcurrent', { socialident: currentUser })
+            await axios.post('http://netcentrum.pl/api/users/getcurrent', { socialident: currentUser })
             .then(response => {
                 setCurrentUserId(response.data[0].id);
             })
@@ -120,7 +120,7 @@ export const AddServiceTaskModal = (props) => {
 
             if(addingServiceTask.title !== '' && addingServiceTask.title !== null && addingServiceTask.time > 5) {
         
-                await axios.post('http://localhost:8800/servicetasks/add', {
+                await axios.post('http://netcentrum.pl/api/servicetasks/add', {
                     id: null,
                     title: addingServiceTask.title,
                     time: addingServiceTask.time,
@@ -131,7 +131,7 @@ export const AddServiceTaskModal = (props) => {
                 .then( response => {
                     setMessage({msg: "Zadanie zostało dodane!", type: "SUCCESS"});
 
-                    axios.post('http://localhost:8800/servicetasks/getlast')
+                    axios.post('http://netcentrum.pl/api/servicetasks/getlast')
                     .then(responseLast => {
                         const { title, id } = responseLast.data[0];
                             if(addingServiceTask.title === title) {

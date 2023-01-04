@@ -17,7 +17,7 @@ const OnHoldModal = (props) => {
     const saveChangesHandler = async e => {
         if (e.target.name === "confirmSave") {
        
-            await axios.post("http://localhost:8800/tasks/hold/"+holdedTask.id, { whyHolded: holdedTask.whyholded })
+            await axios.post("http://netcentrum.pl/api/tasks/hold/"+holdedTask.id, { whyHolded: holdedTask.whyholded })
             .then(response => {
                 tasksDispatch({ type: 'HOLD_SUCCESS', payload: holdedTask });
                 setMessage({msg: "Zadanie zostało wstrzymane!", type: "SUCCESS"});

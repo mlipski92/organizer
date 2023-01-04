@@ -9,7 +9,7 @@ const ArchiveProject = (props) => {
             status: 2
         });
 
-        await axios.post("http://localhost:8800/projects/archive/" + props.id)
+        await axios.post("http://netcentrum.pl/api/projects/archive/" + props.id)
         .then(response => {
             props.projectsDispatch({ type: 'ARCHIVE_SUCCESS', payload: { id: props.id, name: props.name, status: 2} })
             

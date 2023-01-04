@@ -13,7 +13,7 @@ const UsersListComponent = () => {
     const [users, usersDispatch] = useReducer(usersReducer, initialUsersState);
 
     useEffect(() => {
-        axios.post('http://localhost:8800/users/all')
+        axios.post('http://netcentrum.pl/api/users/all')
         .then(response => {
             usersDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })

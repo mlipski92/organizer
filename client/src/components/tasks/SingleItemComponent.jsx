@@ -91,7 +91,7 @@ const SingleItem = (props) => {
 
     const saveChangesHandler = async (id) => {
 
-            await axios.post("http://localhost:8800/tasks/hold/"+id, { whyHolded: '' })
+            await axios.post("http://netcentrum.pl/api/tasks/hold/"+id, { whyHolded: '' })
             .then(response => {
                 tasksDispatch({ type: 'RESUME_SUCCESS', payload: id });
             })

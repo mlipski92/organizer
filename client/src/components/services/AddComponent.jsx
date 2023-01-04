@@ -75,11 +75,11 @@ export const AddServiceModal = (props) => {
         } else if (name === 'confirmSave') {
 
             if (addingService.name !== null && addingService.name !== '') {
-                await axios.post('http://localhost:8800/services/add', {name: addingService.name})
+                await axios.post('http://netcentrum.pl/api/services/add', {name: addingService.name})
                 .then( response => {
                     setMessage({msg: "Projekt został dodany!", type: "SUCCESS"});
 
-                    axios.post('http://localhost:8800/services/last')
+                    axios.post('http://netcentrum.pl/api/services/last')
                     .then(responseLast => {
                         const { name, id } = responseLast.data[0];
                             if(addingService.name === name) {

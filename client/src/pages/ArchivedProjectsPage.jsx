@@ -19,7 +19,7 @@ const ArchivedProjectsPage = () => {
     
 
     useEffect(() => {
-        axios.post("http://localhost:8800/projects/archived")
+        axios.post("http://netcentrum.pl/api/projects/archived")
         .then(response => {
             projectsDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })

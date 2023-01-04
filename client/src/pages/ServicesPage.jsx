@@ -26,7 +26,7 @@ const ServicesPage = () => {
 
 
   useEffect(() => {
-    axios.post('http://localhost:8800/services/all')
+    axios.post('http://netcentrum.pl/api/services/all')
       .then(response => {
           servicesDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
       })

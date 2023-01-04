@@ -43,7 +43,7 @@ const TasksPage = () => {
 
 
     useEffect( () => {
-        axios.post(`http://localhost:8800/tasks/get/${id}`)
+        axios.post(`http://netcentrum.pl/api/tasks/get/${id}`)
         .then(response => {
             tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             setCurrentProject(id);
@@ -54,7 +54,7 @@ const TasksPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.post('http://localhost:8800/projects/all')
+        axios.post('http://netcentrum.pl/api/projects/all')
         .then(response => {
             projectsDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             currentProjectNameHandler(id, response.data);

@@ -25,7 +25,7 @@ const ProjectsPage = () => {
     const [message, setMessage] = useState(projectObject.message);
  
     useEffect(() => {
-        axios.post('http://localhost:8800/projects/all')
+        axios.get('http://netcentrum.pl/api/projects/all')
         .then(response => {
             projectsDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })

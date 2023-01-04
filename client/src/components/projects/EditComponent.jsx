@@ -29,7 +29,7 @@ const EditModal = (props) => {
         if (e.target.name === "confirmSave") {
 
             if (editingProject.name !== null && editingProject.name !== '') {
-                await axios.post("http://localhost:8800/projects/edit/"+editingProject.id, { name: editingProject.name })
+                await axios.post("http://netcentrum.pl/api/projects/edit/"+editingProject.id, { name: editingProject.name })
                 .then(response => {
                     projectsDispatch({ type: 'EDIT_SUCCESS', payload: editingProject });
                     setMessage({msg: "Projekt został edytowany!", type: "SUCCESS"});

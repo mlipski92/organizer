@@ -7,7 +7,7 @@ const SingleItem = (props) => {
     const { disallowedUsersDispatch } = useContext(UsersContext);
 
     const allowUser = (id) => {
-        axios.post('http://localhost:8800/users/allow-user/'+id)
+        axios.post('http://netcentrum.pl/api/users/allow-user/'+id)
         .then(response => {
             disallowedUsersDispatch({ type: 'ALLOW_SUCCESS', payload: response.data })
         })

@@ -12,7 +12,7 @@ const MainPage = () => {
     const [ salary, setSalary ] = useState(0);
 
     useEffect(() => {
-        axios.post(`http://localhost:8800/servicetasks/sumtimes`)
+        axios.post(`http://netcentrum.pl/api/servicetasks/sumtimes`)
         .then(response => {
             const minutes = Object.values(response.data[0]);
             const pricePerHour = 120;

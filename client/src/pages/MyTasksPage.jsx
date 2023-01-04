@@ -18,7 +18,7 @@ const MyTasksPage = () => {
     const [myTasks, myTasksDispatch] = useReducer(myTasksReducer, initialMyTasksState);
 
     useEffect(() => {
-        axios.post('http://localhost:8800/tasks/mytasks', {userid: 13})
+        axios.post('http://netcentrum.pl/api/tasks/mytasks', {userid: 13})
         .then(response => {
             myTasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data })
         })
