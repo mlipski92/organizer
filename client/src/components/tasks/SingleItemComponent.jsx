@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useContext } from "react";
 
 import { TaskContext } from "../../contexts/TasksContext";
@@ -118,7 +119,7 @@ const SingleItem = (props) => {
                                                 <br />
                                                 <span className="mainPart__users">{props.elData.name}</span>
                                                 
-                                                { currentProjectStatus === 1 &&
+                                                { parseInt(currentProjectStatus) === 1 &&
                                                     <div className="buttons-list">
                                                         { props.elData.status !== 2 ? <TickTask id={props.id} itemData={props.elData}  data={props.data} tasksDispatch={tasksDispatch} /> : null} 
                                                         { props.elData.whyholded !== '' ? <ResumeTask askHoldedTaskHandler={askHoldedTaskHandler} resumeTaskHandler={resumeTaskHandler} id={props.id} /> : null}

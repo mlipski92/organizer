@@ -30,10 +30,10 @@ const StructureComponent = () => {
 
     (async () => {
       if (isAuthenticated) {
-        await axios.post('http://localhost:8800/users/getcurrent', { socialident: user.email })
+        await axios.post('http://netcentrum.pl/api/users/getcurrent', { socialident: user.email })
         .then(response => {
             if (response.data.length === 0) {
-              axios.post('http://localhost:8800/users/add', { name: user.given_name + " " + user.family_name, img: user.picture, socialident: user.email })
+              axios.post('http://netcentrum.pl/api/users/add', { name: user.given_name + " " + user.family_name, img: user.picture, socialident: user.email })
               .then(response => {
                 console.log("Dodano użytkownika!");
               })
@@ -51,7 +51,7 @@ const StructureComponent = () => {
 
       await setCurrentUser(user?.email)
 
-      await axios.post('http://localhost:8800/users/checkifallowed', { socialident: user?.email })
+      await axios.post('http://netcentrum.pl/api/users/checkifallowed', { socialident: user?.email })
       .then(response => {
         setIsAllowed(response.data[0].allowed);
       })
@@ -62,7 +62,6 @@ const StructureComponent = () => {
   }, [isAuthenticated, setCurrentUser,currentUser]);
 
 
-  //NIE DZIAŁA LOGOWANIE. ZA KAŻDYM RAZEM WYŚWIETLA SIĘ PLANSZA W LOGOWANIEM< KTÓRA PRZEKIEROWUJE NA LOGOWANIE PO ZALOGOWANIU
   return (
     <>
         {isAllowed !== null ? (

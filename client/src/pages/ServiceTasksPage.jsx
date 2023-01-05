@@ -32,7 +32,7 @@ const ServiceTasksPage = () => {
     const [services, servicesDispatch] = useState(servicesObject);
 
     useEffect( () => {
-        axios.post(`http://netcentrum.pl/api/servicetasks/get/${id}`)
+        axios.get(`http://netcentrum.pl/api/servicetasks/get/${id}`)
         .then(response => {
             servicetasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             setCurrentProject(id);
@@ -43,7 +43,7 @@ const ServiceTasksPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.post('http://netcentrum.pl/api/services/all')
+        axios.get('http://netcentrum.pl/api/services/all')
         .then(response => {
             servicesDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             currentServiceNameHandler(id, response.data);
@@ -55,7 +55,7 @@ const ServiceTasksPage = () => {
 
     const currentServiceNameHandler = (id, data) => {
         data.forEach(el => {
-            if (el.id === parseInt(id)) {
+            if (parseInt(el.id) === parseInt(id)) {
                 setCurrentServiceName(el.name);
             }
         });

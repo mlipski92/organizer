@@ -43,7 +43,7 @@ const TasksPage = () => {
 
 
     useEffect( () => {
-        axios.post(`http://netcentrum.pl/api/tasks/get/${id}`)
+        axios.get(`http://netcentrum.pl/api/tasks/get/${id}`)
         .then(response => {
             tasksDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             setCurrentProject(id);
@@ -54,7 +54,7 @@ const TasksPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.post('http://netcentrum.pl/api/projects/all')
+        axios.get('http://netcentrum.pl/api/projects/all')
         .then(response => {
             projectsDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
             currentProjectNameHandler(id, response.data);
@@ -66,11 +66,13 @@ const TasksPage = () => {
 
     const currentProjectNameHandler = (id, data) => {
         data.forEach(el => {
-            if (el.id === parseInt(id)) {
+            if (parseInt(el.id) === parseInt(id)) {
                 setCurrentProjectName(el.name);
                 setCurrentProjectStatus(el.status);
             }
         });
+        
+        
     }
 
 
@@ -79,7 +81,7 @@ const TasksPage = () => {
     return (
         <>
             <div className="mainPart__projects">
-                { currentProjectStatus === 1 &&
+                { parseInt(currentProjectStatus) === 1 &&
                     <TaskContext.Provider value={{setAddingTask, addingTask, tasksDispatch, currentProject, setCurrentProject, setMessage, currentProjectName}}>
                         <div className="mainPart__main-title"><AddTask /></div>
                     </TaskContext.Provider>

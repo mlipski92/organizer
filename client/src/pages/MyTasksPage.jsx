@@ -5,6 +5,7 @@ import { TaskContext } from "../contexts/TasksContext";
 import myTasksReducer from "../reducers/myTasksReducer";
 
 import MapData from "../components/mytasks/MapDataComponent";
+import { useContext } from "react";
 
 
 const initialMyTasksState = {
